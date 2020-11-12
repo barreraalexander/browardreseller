@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<section>
+<h1 class="display-4">Broward County Resellers</h1>
+<div class="container">
+    <form action="" method="POST" class="form-group" enctype="multipart/form-data">
+        {{form.hidden_tag()}}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4"> Add to Inventory </legend>
+            
+            <div class="form-group">
+                {{form.category.label}}
+                <select name="category" class="form-control form-control-sm">
+                    {% for choice in form.category.choices %}
+                        <option class="form-control" value={{choice}}>{{choice.upper()}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            {{form.c_type.label}}
+            {{form.c_type(class="form-control", type="text", size="100", placeholder="Wallet, Jersey, Laptop, etc.")}}
+            <div class="form-group">
+            </div>
+
+            
+            <div class="form-group">
+                {{form.brand.label}}
+                {{form.brand(class="form-control", type="text", size="100", placeholder="Gucci, Apple, etc.")}}
+            </div>
+            
+            <div class="form-group">
+                {{form.model_num.label}}
+                {{form.model_num(class="form-control", type="text", size="100", placeholder="model #")}}
+            </div>
+
+            <div class="form-group">
+                {{form.colors.label}}
+                <div id="colors" name="colors" class="form-control">
+                    {% for choice in form.colors.choices %}
+                        <div class="form-check">
+                            <input class="form-check-input" id="choice{{loop.index}}" name="colors" type="checkbox" value={{choice}}>
+                            <label class="form-check-label" for="choice{{loop.index}}"> {{choice}} </label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{form.size.label}}
+                {{form.size(class="form-control", type="text", size="100", placeholder="M S etc.")}}
+            </div>
+
+            <div class="form-group">
+                {{form.obj_condition.label}}
+                <div id="obj_condition" name="obj_condition" class="form-control" >
+                    {% for choice in form.obj_condition.choices%}
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="choice{{loop.index}}" name="obj_condition" value={{choice}}>
+                            <label class="form-check-label" for="choice{{loop.index}}"> {{choice}} </label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="form-group">
+                {{form.name.label}}
+                {{form.name(class="form-control", type="text", size="100", placeholder="The name that people would search for")}}
+            </div>
+
+
+            <div class="form-group">
+                {{form.orig_value.label}}
+                {{form.orig_value(class="form-control", type="text", size="100", placeholder="$")}}
+            </div>
+
+            <div class="form-group">
+                {{form.purchase_price.label}}
+                {{form.purchase_price(class="form-control", type="text", size="100", placeholder="$")}}
+            </div>
+
+            <div class="form-group">
+                {{form.selling_price.label}}
+                {{form.selling_price(class="form-control", type="text", size="100", placeholder="$")}}
+            </div>
+
+            <div class="form-group">
+                {{form.shipping_price.label}}
+                {{form.shipping_price(class="form-control", type="text", size="100", placeholder="$")}}
+            </div>
+
+
+            <div class="form-group">
+                {{form.uploaded_to.label}}
+                <div id="uploaded_to" name="uploaded_to" class="form-control">
+                    {% for choice in form.uploaded_to.choices %}
+                        <div class="form-check">
+                            <input class="form-check-input" id="choice{{loop.index}}" name="uploaded_to" type="checkbox" value={{choice}}>
+                            <label class="form-check-label" for="choice{{loop.index}}"> {{choice}} </label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{form.imgfiles(class="btn btn-outline-info")}}
+            </div>
+
+        </fieldset>
+        <div class="form-group">
+            {{form.submit_new_item(class="btn btn-outline-info")}}
+        </div>
+
+    </form>
+</div>
+</section>
+
+{% endblock content %}

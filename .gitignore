@@ -1,0 +1,10 @@
+site/static/gen
+site/static/.webassets-cache
+site/static/images
+site/webhandlers
+__pycache__
+progress.txt
+**.vscode
+outline
+**.txt
+debug.log
