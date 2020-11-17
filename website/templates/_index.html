@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- //SECTION: index_section1 -->
+<section id="index_section1">
+    <div>
+        <p>slider of announcments</p>
+        <div id="maxim_svg_ctnr">
+            <svg id="maxim_svg" viewBox="0 0 32.543 32.146">
+                <g id="maximize-white" transform="translate(-206.574 -216.574)">
+                    <g id="arrow_bottom" transform="translate(224.403 237.15) rotate(135)">
+                        <line id="Line_1" data-name="Line 1" x2="9.806" transform="translate(0 4.426)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1.5"/>
+                        <line id="Line_2" data-name="Line 2" x2="4.426" y2="4.426" transform="translate(9.815 0)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1.5"/>
+                        <line id="Line_3" data-name="Line 3" y1="4.426" x2="4.426" transform="translate(9.815 4.426)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1.5"/>
+                    </g>
+                    <g id="arrow_top" transform="translate(221.287 228.143) rotate(-45)">
+                        <line id="Line_1-2" data-name="Line 1" x2="9.806" transform="translate(0 4.426)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1.5"/>
+                        <line id="Line_2-2" data-name="Line 2" x2="4.426" y2="4.426" transform="translate(9.815 0)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1.5"/>
+                        <line id="Line_3-2" data-name="Line 3" y1="4.426" x2="4.426" transform="translate(9.815 4.426)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1.5"/>
+                    </g>
+                </g>
+            </svg>            
+        </div>
+        <div id="minim_svg_ctnr" class="invisible">
+            <svg viewBox="0 0 129.569 129.569">
+                <g id="minimize-white" transform="translate(-222.216 -232.216)">
+                  <g id="arrow" transform="translate(630.384 109.886) rotate(135)">
+                    <line id="Line_1" data-name="Line 1" x2="74" transform="translate(286.5 110.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5"/>
+                    <line id="Line_2" data-name="Line 2" x2="23" y2="23" transform="translate(337.5 87.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5"/>
+                    <line id="Line_3" data-name="Line 3" y1="23" x2="23" transform="translate(337.5 110.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5"/>
+                  </g>
+                  <g id="arrow-2" data-name="arrow" transform="translate(-56.384 484.114) rotate(-45)">
+                    <line id="Line_1-2" data-name="Line 1" x2="74" transform="translate(286.5 110.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5"/>
+                    <line id="Line_2-2" data-name="Line 2" x2="23" y2="23" transform="translate(337.5 87.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5"/>
+                    <line id="Line_3-2" data-name="Line 3" y1="23" x2="23" transform="translate(337.5 110.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5"/>
+                  </g>
+                </g>
+              </svg>
+        </div>
+    </div>
+    <div id="ann_slider_ctnr" class="invisible">
+        <div id="ann_slider">
+
+        </div>
+
+    </div>
+</section>
+
+<!-- //SECTION: index_section2 -->
+<section id="index_section2">
+    <div id="main_item_ctnr">
+        <div>
+            <p>something promotional</p>
+        </div>
+    </div>
+    <button class="btn_filled">
+        LEARN MORE
+    </button>
+</section>
+
+<!-- //SECTION: index_section3 -->
+<section id="index_section3">
+    <h2 class="h2_banner">FEATURED FOOTWEAR</h2>
+    <div class="items_flex">    
+        {{flexs[0]}}
+        {{flexs[1]}}
+        {{flexs[2]}}
+        {{flexs[3]}}
+</section>
+
+<section id="index_section4">
+    <h2 class="h2_banner"> TRENDING </h2>
+    <div class="items_flex">
+        {{flexs[4]}}
+        {{flexs[5]}}
+    </div>
+</section>
+
+<section id="index_section5">
+    <div class="filter_ctnr">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div class='badge_ctnr'>
+        <div class="item_badge_green">
+            <p>
+                ON SALE!
+            </p>
+            <div class="circ">
+                
+            </div>
+        </div>
+        <div class="item_badge_blue">
+            <p>
+                TRENDS
+            </p>
+            <div class="circ">
+                
+            </div>
+        </div>
+        <div class="item_badge_yellow">
+            <p>
+                By Color
+            </p>
+            <div class="circ">
+                
+            </div>
+        </div>
+        <div class="item_badge_yellow">
+            <p>
+                By Price
+            </p>
+            <div class="circ">
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="index_section6">
+    <h3>
+        BUY SOMETHING PLZ :)
+    </h3>
+</section>
+
+{% endblock content %}

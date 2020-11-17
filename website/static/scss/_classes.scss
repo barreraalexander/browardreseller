@@ -1,0 +1,108 @@
+.badge_ctnr{
+    column-gap: 2em;
+    display: grid;
+    grid-template-rows: 4em 4em;
+    grid-template-columns: 8em 8em;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 5em;
+    padding: 0;
+    row-gap: 2em;
+    width: 100%;
+}
+
+.btn_filled{
+    @include cta_btn;
+    color: #fff;
+    background-color: $primary1;
+    border: 1px solid $primary1;
+}
+
+.btn_empty{
+    @include cta_btn;
+    color: $primary1;
+    background-color: #fff;
+    border: 2px solid $primary1;
+}
+
+.circ{
+    background-color: #fff;
+    border-radius: 100px;
+    width: 2.8em !important;
+    position: absolute;
+    right: 12px;
+    bottom: 5px;
+    border: 1px solid transparent;
+    height: 2.8em;
+}
+.filter_ctnr{
+    display: none;
+}
+.h2_banner{
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+.invisible{
+    display: none;
+}
+
+.items_flex{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    width: 100%;
+    div{
+        background-color: $primary4;
+        border-radius: 10px;
+        height: 10em;
+        margin: 1em auto;
+        padding: .5em;
+        width: 8em;
+
+    }
+}
+
+.item_badge_blue{
+    @include item_badge;
+    background-color: $primary1;
+}
+
+.item_badge_green{
+    @include item_badge;
+    background-color: $primary2;
+}
+.item_badge_yellow{
+    background-color: $primary3;
+    @include item_badge;
+}
+
+.item_flexy_ctnr{
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    img{
+        border-radius: 10px;
+        height: 50%;
+        // margin: 0 auto;
+        margin-left:auto;
+        margin-right:auto;
+        padding: .2em;
+    
+    }
+    p{
+        font-size: .8rem;
+        font-weight: 500;
+        overflow: hidden;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+        // max-width: 60%;
+        // position: absolute;
+    }
+}
+

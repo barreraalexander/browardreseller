@@ -1,0 +1,110 @@
+//SECTION: index_section1
+#index_section1{
+    background-color: $primary2;
+    height: 2em;
+    div{
+        gap: 2em;
+        padding: 0 2em;
+        position: relative;
+        right: 0;
+        top: 0;
+    }
+    p{
+        align-self: center;
+        color: #fff;
+        padding: .2em;
+        text-align: center;
+    }
+    img{
+        margin: .3em;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+}
+
+//SECTION: index_section2
+#index_section2{
+    background-color: $primary3;
+    height: 25em;
+    padding: .5em;
+
+}
+
+//SECTION: index_section3
+#index_section3{
+    
+}
+
+
+//SECTION: index_section4
+#index_section4{
+    background-color: $primary1;
+    padding-top: .2em;
+    padding-bottom: .5em;
+    h2{
+        color: #fff !important;
+    }
+    
+}
+
+//SECTION: index_section5
+#index_section5{  
+    height: 20em;
+    background-color: $primary4;
+    display: flex;
+    flex-flow: row nowrap;
+    div{
+        width: 100%;
+    }
+}
+
+//SECTION: index_section6
+#index_section6{
+    height: 20em;
+    background-color: $primary2;
+    padding: 2em;
+    h3{
+        color: #fff;
+        letter-spacing: 3px;
+        font-weight: 900;
+        font-size: 1.5rem;
+        padding-top: 5em;
+        text-align: center;
+    }
+}
+
+
+//SECTION: VARIOUS RULESETS ONLY ON INDEX
+
+#ann_slider_ctnr{
+    
+}
+
+
+#ann_slider{
+    background-color: $primary4;
+    border-radius: 10px;
+    height: 10em;
+    margin-top: 1em;
+}
+
+
+#main_item_ctnr{
+    background-color: $primary4;
+    border-radius: 10px;
+    display: block;
+    margin: 1em auto;
+    padding: .5em;
+    height: 80%;
+    width: 80%;
+}
+
+#maxim_svg_ctnr,#minim_svg_ctnr{
+    position: absolute !important;
+    width: 6em !important;
+    right: -1em !important;
+    svg{
+        width: 100%;
+    }
+}
