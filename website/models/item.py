@@ -1,86 +1,86 @@
 from website.models.master import Model
 from datetime import datetime
 
-
-
 class Item (Model):
     mtype = 'item'
     tablename = 'inventory'
 #//SECTION: DB METHODS
     @classmethod
     def get_insert_statement (cls, model):
-            statement = (f"""INSERT INTO {model.tablename}
-            (_id, category, c_type, brand, model_num,
-            colors, size, name, obj_condition, orig_value,
-            purchase_price, selling_price, shipping_price,
-            uploaded, uploaded_to, imgfiles)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s,
-                    %s, %s, %s, %s, %s, %s, %s, %s)""")
+            statement = (f"""
+            INSERT INTO {model.tablename}
+                (_id, category, c_type, brand, model_num,
+                colors, size, name, obj_condition, orig_value,
+                purchase_price, selling_price, shipping_price,
+                stock, imgfiles) 
+            VALUES
+                ('{model._id}', '{model.category}',
+                '{model.c_type}', '{model.brand}',
+                '{model.model_num}', '{model.name}', 
+                '{model.colors}', '{model.size}',
+                '{model.obj_condition}', {model.orig_value},
+                {model.purchase_price}, {model.selling_price},
+                {model.shipping_price}, {model.stock},
+                '{model.imgfiles}')
+            """)
+            return statement
 
-            record = (model._id, model.category,
-                    model.c_type, model.brand,
-                    model.model_num, model.colors,
-                    model.size, model.name,
-                    model.obj_condition, model.orig_value,
-                    model.purchase_price, model.selling_price,
-                    model.shipping_price,
-                    model.uploaded, model.uploaded_to,
-                    model.imgfiles)       
-            
-            return {
-                'statement':statement,
-                'record':record,
-            }
 
     @classmethod
     def get_table_statement (cls):
-        """ Returns the DB statement that
-            creates this model's table"""
+        """
+        Returns the DB statement that
+        creates this model's table
+        """
 
-        statement = (f"""CREATE TABLE {tablename}
-                        (_id varchar(30) PRIMARY KEY,
-                        category varchar(100),
-                        c_type varchar(100),
-                        brand varchar(100),
-                        model_num varchar (100),
-                        colors text,
-                        size varchar (50),
-                        name varchar(100),
-                        obj_condition varchar(100),
-                        orig_value float DEFAULT 0,
-                        purchase_price float DEFAULT 0,
-                        selling_price float DEFAULT 0,
-                        shipping_price float DEFAULT 0,
-                        uploaded varchar(10) DEFAULT "False",
-                        uploaded_to text,
-                        sold varchar(10) DEFAULT "False",
-                        imgfiles text,
-                        upldate datetime DEFAULT CURRENT_TIMESTAMP()
+        statement = (f"""
+        CREATE TABLE {tablename}
+            (_id varchar(30) PRIMARY KEY,
+            category varchar(100),
+            c_type varchar(100),
+            brand varchar(100),
+            model_num varchar (100),
+            name varchar(100),
+            colors text,
+            size varchar (50),
+            obj_condition varchar(100),
+            orig_value float DEFAULT 0,
+            purchase_price float DEFAULT 0,
+            selling_price float DEFAULT 0,
+            shipping_price float DEFAULT 0,
+            stock int DEFAULT 0,
+            imgfiles text,
+            upldate datetime DEFAULT CURRENT_TIMESTAMP(),
+            moddate datetime DEFAULT CURRENT_TIMESTAMP()
                         )""")                        
         return statement
 
     @classmethod
     def get_update_statement (cls, model):
-        """ Returns the DB statement that
-            updates models in this table"""
-        statement = (f"""UPDATE inventory
+        """ 
+        Returns the DB statement that
+        updates models in this table
+        """
+        statement = (f""" UPDATE inventory
         SET 
             category = "{model.category}",
             c_type = "{model.c_type}",
             brand = "{model.brand}",
             model_num = "{model.model_num}",
+            name = "{model.name}",
             colors = "{model.colors}",
             size = "{model.size}",
             obj_condition = "{model.obj_condition}",
-            name = "{model.name}",
             orig_value = {model.orig_value},
+            purchase_price = {model.purchase_price},
             selling_price = {model.selling_price},
             shipping_price = {model.shipping_price},
-            uploaded = "{model.uploaded}",
-            uploaded_to = "{model.uploaded_to}"
+            stock = {model.stock},
+            imgfiles = "{model.imgfiles}",
+            moddate = CURRENT_TIMESTAMP()
         WHERE
-            _id = "{model._id}" """)
-        
+            _id = "{model._id}"
+        """)
         return statement
 
 
@@ -100,6 +100,8 @@ class Item (Model):
         self.purchase_price = mdict["purchase_price"]
         self.selling_price = mdict["selling_price"]
         self.shipping_price = mdict["shipping_price"]
+        self.stock = mdict["stock"]
+
         #sell status
         self._set_defaults (mdict)
         self._set_details (mdict)
@@ -116,23 +118,6 @@ class Item (Model):
 
 
     def _set_defaults (self, mdict):
-        try:
-            self.uploaded = mdict["uploaded"]
-        except:
-            self.uploaded = "False"
-
-        try:
-            self.uploaded_to = mdict["uploaded_to"]
-            # self.uploaded_to = uploaded_to.split(",")
-        except:
-            self.uploaded_to = "None"
-
-        try:
-            self.sold = mdict["sold"]
-        except:
-            self.sold = "False"
-
-
         try:
             csv_imgfiles = mdict["imgfiles"]
             self.imgfiles = csv_imgfiles.split(",")
@@ -228,7 +213,43 @@ class Item (Model):
     def item_count ():
         pass
 
+
+    @staticmethod
+    def get_items_totals(models):
+        """
+        Returns a dict with 2 values:
+        The total 
+        """
+        purchase_price = 0
+        selling_price = 0
+        shipping_price = 0
+        orig_value = 0
+        for model in models:
+            if model:                    
+                purchase_price += model.purchase_price
+                selling_price += model.selling_price
+                shipping_price += model.shipping_price
+                orig_value += model.orig_value
+        return {
+            'purchase_price': round(purchase_price, 2),
+            'selling_price': round(selling_price, 2),
+            'shipping_price': round(shipping_price/len(models), 2) + (1 * len(models)),
+            'orig_value': round(orig_value, 2),
+        }
     
+
+    @staticmethod
+    def get_models (data):
+        """
+        accepts raw cart data from the database ie,
+        dollar separated values, model1__id$model2_id
+        """
+        id_ls = data.split('$')
+        models = [ Item.get(by='_id', value=_id) \
+                 for _id in id_ls
+                 if _id != ""]
+        
+        return models
 
     def __str__(self):
         return f""" 

@@ -42,12 +42,10 @@ class DB (MySQL):
         return record
 
     # #!! INSERTS AND UPDATES !!# 
-    def insert (self, statements):
+    def insert (self, statement):
         try:
-            record = statements['record']
-            statement = statements ['statement']
             cur = self.connection.cursor ()
-            cur.execute (statement, record)
+            cur.execute (statement)
             self.connection.commit ()
         except Exception as err:
             print ('ERROR INSERTING INTO DATABASE: \n')

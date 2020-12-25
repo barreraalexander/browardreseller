@@ -1,151 +1,70 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
 
-<section>
-<h1 class="display-4"> Inventory </h1>
-<div class="container">
-    <div class="container">
-        <h1>{{model.name}}</h1>
-        <small class="text-muted"> ID: {{ model._id }}</small>
-        <p class="text-muted">DETAILS: {{model.details}}</p>
-        <div class="container" stye="right: 0em;">
-            {% for imgfile in model.imgfiles %}
-                <img class="img-fluid" src="{{ url_for('static', filename='images/item_images/'+model._id+'/'+imgfile)}}">
-            {% endfor %}  
-        </div>
-    </div>
-
-    <div class="container">
-        <form action="" method="POST" class="form-group" enctype="multipart/form-data">
-            {{form.hidden_tag()}}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4"> Update Item </legend>
-                
-                <div class="form-group">
-                    {{form.category.label}}
-                    <select name="category" class="form-control form-control-sm">
-                        {% for choice in form.category.choices %}
-                            {% if choice == model.category %}
-                                <option class="form-control" value={{choice}} selected>{{choice.upper()}}</option>
-                            {% else %}
-                                <option class="form-control" value={{choice}}>{{choice.upper()}}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
+<!-- //SECTION: inv_item_section1 -->
+<main>
+    <section id="inv_item_section1" >
+        <div class="item_top_flex">
+            {% for img_src in model.imgfiles  %}
+                <div class="item_imgs_ctnr">
+                    <img id="item_img_{{loop.index}}" class="invisible" src="{{ url_for('static', filename='images/item_images/'+model._id+'/'+img_src)}}">
+                    {%if loop.index == 1%}
+                        <img id="item_img_{{loop.index}}_thumb" class="" src="{{ url_for('static', filename='images/item_images/'+model._id+'/thumbnails/'+img_src)}}">
+                    {% else %}
+                        <img id="item_img_{{loop.index}}_thumb" class="invisible" src="{{ url_for('static', filename='images/item_images/'+model._id+'/thumbnails/'+img_src)}}">
+                    {%endif%}
                 </div>
-
-                
-                <div class="form-group">
-                    {{form.c_type.label}}
-                    {{form.c_type(class="form-control", type="text", size="100", value=model.c_type)}}
-                </div>
+            {% endfor %}
     
-                
-                <div class="form-group">
-                    {{form.brand.label}}
-                    {{form.brand(class="form-control", type="text", size="100", value=model.brand)}}
-                </div>
-                
-                <div class="form-group">
-                    {{form.model_num.label}}
-                    {{form.model_num(class="form-control", type="text", size="100", value=model.model_num)}}
-                </div>
-    
-                <div class="form-group">
-                    {{form.colors.label}}
-                    <div id="colors" name="colors" class="form-control">
-                        {% for choice in form.colors.choices %}
-                            <div class="form-check">
-                                    {% if choice in model.colors %}
-                                        <input class="form-check-input" id="choice{{loop.index}}" name="colors" type="checkbox" value={{choice}} checked>
-                                    {% else %}
-                                        <input class="form-check-input" id="choice{{loop.index}}" name="colors" type="checkbox" value={{choice}}>
-                                    {% endif %}
-                                <label class="form-check-label" for="choice{{loop.index}}"> {{choice}} </label>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-    
-                <div class="form-group">
-                    {{form.size.label}}
-                    {{form.size(class="form-control", type="text", size="100", value=model.size)}}
-                </div>
-    
-                <div class="form-group">
-                    {{form.obj_condition.label}}
-                    <div id="obj_condition" name="obj_condition" class="form-control">
-                        {% for choice in form.obj_condition.choices %}
-                            <div class="form-check form-check-inline">
-                                {% if model.obj_condition==choice %}
-                                    <input class="form-check-input" type="radio" id="choice{{loop.index}}" name="obj_condition" value={{choice}} checked>
-                                {%  else %}
-                                    <input class="form-check-input" type="radio" id="choice{{loop.index}}" name="obj_condition" value={{choice}}>
-                                {% endif %}
-                                <label class="form-check-label" for="choice{{loop.index}}"> {{choice}} </label>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    {{form.name.label}}
-                    {{form.name(class="form-control", type="text", size="100", value=model.name)}}
-                </div>
-    
-    
-                <div class="form-group">
-                    {{form.orig_value.label}}
-                    {{form.orig_value(class="form-control", type="text", size="100", value=model.orig_value)}}
-                </div>
-    
-                <div class="form-group">
-                    {{form.purchase_price.label}}
-                    {{form.purchase_price(class="form-control", type="text", size="100", value=model.purchase_price)}}
-                </div>
-    
-                <div class="form-group">
-                    {{form.selling_price.label}}
-                    {{form.selling_price(class="form-control", type="text", size="100", value=model.selling_price)}}
-                </div>
-    
-                <div class="form-group">
-                    {{form.shipping_price.label}}
-                    {{form.shipping_price(class="form-control", type="text", size="100", value=model.shipping_price)}}
-                </div>
-    
-    
-                <div class="form-group">
-                    {{form.uploaded_to.label}}
-                    <div id="uploaded_to" name="uploaded_to" class="form-control">
-                        {% for choice in form.uploaded_to.choices %}
-                            <div class="form-check form-check-inline">
-                                {% if choice in model.uploaded_to %}
-                                    <input class="form-check-input" id="choice{{loop.index}}" name="uploaded_to" type="checkbox" value={{choice}} checked>
-                                {% else %}
-                                    <input class="form-check-input" id="choice{{loop.index}}" name="uploaded_to" type="checkbox" value={{choice}}>
-                                {% endif %}
-                                <label class="form-check-label" for="choice{{loop.index}}"> {{choice}} </label>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-    
-                <div class="form-group">
-                    {{form.imgfiles(class="btn btn-outline-info")}}
-                </div>
-    
-            </fieldset>
-            <div class="form-group">
-                {{form.submit_update_item(class="btn btn-outline-info")}}
+            <div class="model_pricing_ctnr">
+                <p class="pricing">
+                    ${{ model.selling_price }}
+                </p>
+                <p class="shipping">
+                    Shipping
+                    ${{ model.shipping_price }}
+                </p>
             </div>
-    
-        </form>
-    </div>
+        </div>
 
-</div>
-</section>
+
+        <div class="model_specs_ctnr">
+            <p>  
+                {{ model.name }}
+            </p>
+            <p> 
+                {{ model.brand|upper }} 
+            </p>
+            <p>  
+                {{ model.size }} 
+            </p>
+
+            <div class="colors_div">
+                <p>COLORS</p>
+                <div class="color_circs_ctnr">
+                    {% for color in model.colors %}
+                        {%if color == "white"%}
+                            <div class='color_circ white_circ_ctnr'>
+                                <div class="color_circ" style="background-color:{{color}};"> </div>
+                            </div>
+                        {% else %}   
+                            <div class="color_circ" style="background-color:{{color}};outline:solid 1px transparent;"></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <form action="" method="POST"  enctype="multipart/form-data">
+            {{form.hidden_tag()}}
+            {{form.submit_atc(class="btn_filled fw_btn")}}
+            {{ form.item_id(class="invisible", value=model._id) }}
+            <p id="model_id" class="invisible">{{model._id}}</p>
+        </form>
+
+    </section>
+</main>
+
 
 {% endblock %}

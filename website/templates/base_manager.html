@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- CSS -->
+        {% assets "manager_scss" %}
+            <link rel="stylesheet" href="{{ ASSET_URL}}">
+        {% endassets %}
+
+
+        {% if title %}
+            <title>
+                Vendor Manager - {{title}}
+            </title>
+        {% else %}
+            <title>
+                Vendor Manager 
+            </title>
+        {% endif %} 
+</head>
+
+
+<body>
+<!-- #//SECTION: base_aside_section -->
+    <section id="base_manager_aside_section">
+        <aside>
+            <nav>              
+                <ul>
+                    <li>
+                        <a href=" {{url_for('managers.home', user_id=current_user.id) }}">
+                            HOME
+                        </a>
+                    </li>
+                    <li>
+                        <a href=" {{url_for('managers.add_item', user_id=current_user._id) }}">
+                            ADD NEW ITEM
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('managers.inventory', user_id=current_user._id)}}">
+                            INVENTORY
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('managers.open_orders', user_id=current_user._id)}}">
+                            ORDERS
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('managers.sales', user_id=current_user._id)}}">
+                            SALES
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('managers.logout', user_id=current_user._id)}}">
+                            LOGOUT
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+    </section>
+<!-- #//SECTION: flashes -->
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+                {% for message in messages %}
+                    <li>
+                        {{ message }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+<!-- #//SECTION: block content -->
+    {% block content %}{% endblock %}
+
+
+    {% assets "main_js" %}
+        <script type="text/javascript" src="{{ ASSET_URL}}"></script>
+    {% endassets %}
+    </body>
+</html>

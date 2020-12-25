@@ -6,82 +6,80 @@ class Sale (Model):
 #//SECTION: DB METHODS
     @classmethod
     def get_insert_statement (cls, model):
-        statement = (f"""INSERT INTO {model.tablename}
-        (_id, item_id, purchase_price, selling_price,
-        shipping_price, uploaded_to, site_sold)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)""")
-        record = (model._id, model.item_id,
-                model.purchase_price, model.selling_price,
-                model.shipping_price, model.uploaded_to,
-                model.site_sold)   
-            
-        return {
-            'statement':statement,
-            'record':record,
-        }
+        """ 
+        Returns the DB statement that
+        inserts models in this table
+        """
+        statement = (f"""
+        INSERT INTO {model.tablename}
+            (_id, manager_id, order_id,
+            user_id, selling_price,
+            shipping_price, selling_cost,
+            shipping_cost)
+        VALUES
+            ('{model._id}', '{model.manager_id}',
+            '{model.order_id}', '{model.user_id}',
+            {model.selling_price}, {model.shipping_price},
+            {model.selling_cost}, {model.shipping_cost})
+        """)
+        return statement
 
     @classmethod
     def get_table_statement (cls):
-        """ Returns the DB statement that
-            creates this model's table"""
-
-        statement = (f"""CREATE TABLE {tablename}
+        """
+        Returns the DB statement that
+        creates this model's table
+        """
+        statement = (f"""
+        CREATE TABLE {cls.tablename}
                         (_id varchar(30) PRIMARY KEY,
-                        item_id varchar(30),
-                        purchase_price float,
+                        manager_id varchar(30),
+                        order_id varchar(30),
+                        user_id varchar(30),
                         selling_price float,
                         shipping_price float,
-                        uploaded_to text,
-                        site_sold varchar(100),
+                        selling_cost float,
+                        shipping_cost float,
                         upldate datetime DEFAULT CURRENT_TIMESTAMP(),
-                        FOREIGN KEY (item_id) REFERENCES inventory(_id)
-                        ON UPDATE CASCADE
+                        moddate datetime DEFAULT CURRENT_TIMESTAMP(),
+                        FOREIGN KEY (manager_id) REFERENCES managers(_id)
+                            ON UPDATE CASCADE,
+                        FOREIGN KEY (order_id) REFERENCES orders(_id)
+                            ON UPDATE CASCADE,
+                        FOREIGN KEY (user_id) REFERENCES users(_id)
+                            ON UPDATE CASCADE
                         )""")
         return statement
 
     @classmethod
     def get_update_statement (cls, model):
-        """ Returns the DB statement that
-            updates models in this table"""
+        """ 
+        Returns the DB statement that
+        updates models in this table
+        """
         statement = (f"""UPDATE inventory
         SET 
-            category = "{model.category}",
-            c_type = "{model.c_type}",
-            brand = "{model.brand}",
-            model_num = "{model.model_num}",
-            colors = "{model.colors}",
-            size = "{model.size}",
-            obj_condition = "{model.obj_condition}",
-            name = "{model.name}",
-            orig_value = {model.orig_value},
+            manager_id = "{model.manager_id}",
+            order_id = "{model.order_id}",
+            user_id = "{model.user_id}",
             selling_price = {model.selling_price},
             shipping_price = {model.shipping_price},
-            uploaded = "{model.uploaded}",
-            uploaded_to = "{model.uploaded_to}"
+            selling_cost = {model.selling_cost},
+            shipping_cost = {model.shipping_cost},
+            moddate = CURRENT_TIMESTAMP()
         WHERE
-            _id = "{model._id}" """)
+            _id = "{model._id}"
+        """)
         
         return statement
 
     def __init__(self, mdict):
         super().__init__(mdict)
-        self.item_id = mdict ["item_id"]
-        self.purchase_price = mdict["purchase_price"]
+        self.manager_id = mdict ["manager_id"]
+        self.order_id = mdict ["order_id"]
+        self.user_id = mdict ["user_id"]
         self.selling_price = mdict["selling_price"]
         self.shipping_price = mdict["shipping_price"]
-        self.uploaded_to = mdict["uploaded_to"]
-        self.site_sold = mdict["site_sold"]
-        # self.upldate = mdict ["upldate"]
+        self.selling_cost = mdict["selling_cost"]
+        self.shipping_cost = mdict["shipping_cost"]
 
-
-    def style_for_web (self):
-        try:        
-            self.upldate = str(self.upldate)[0:10]
-            self.purchase_price = "{:,.2f}".format(self.purchase_price)
-            self.selling_price = "{:,.2f}".format(self.selling_price)
-            self.shipping_price = "{:,.2f}".format(self.shipping_price)
-        except:
-            pass
-
-
-    

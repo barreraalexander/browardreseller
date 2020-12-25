@@ -1,0 +1,41 @@
+//SECTION: home_section1
+
+#home_section1{
+    h1{
+        letter-spacing: 1.2px;
+        text-align: center;
+    }
+}
+
+
+#home_section2{
+    h1{
+        letter-spacing: 1.2px;
+        text-align: center;
+    }
+}
+
+.moneybars_container{
+    height: 3em;
+    position: relative;
+    width: 100%;
+}
+
+.moneybar_empty{
+    border-radius: 20px;
+    border: 2px solid #000;
+    background-color: transparent;
+    position: absolute;
+    height: 3em;
+    width: 100%;
+    z-index: 999;
+}
+.moneybar_fill{
+    background-color: $primary2;
+    border-radius: 20px;
+    border: 2px solid $primary2;
+    height: 3em;
+    position: absolute;
+    width: 50%;
+    z-index: 1000;
+}

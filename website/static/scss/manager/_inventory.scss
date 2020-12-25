@@ -1,0 +1,74 @@
+#inventory_section1{
+    h2{
+        color: #000;
+    }
+    a{
+        text-decoration: none;
+    }
+}
+
+.inventory_ctnr{
+    position: relative;
+    margin: 1em;
+    margin-top: 3em;
+    padding: 1em;
+    p{
+        font-size: 1rem;
+        font-weight: 600;
+    }
+}
+
+.item_details{
+    display: flex;
+    flex-flow: row wrap;
+    gap: .5em;
+    p{
+        border: 1px solid #c8c8c8;
+        border-radius: 20px;
+        padding: .2em;
+        font-size: .8rem;
+        padding: 1em;
+    }
+}
+
+.money_stats{
+    margin-bottom: 1em;
+    h5{
+        font-size: 1.5rem;
+        color: $primary2;
+        letter-spacing: 1.5px;
+    }
+}
+
+.button_ctnr{
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 2em 0em;
+    justify-content: flex-start;
+    gap: 1em;
+    width: 100%;
+    button{
+        border: 1.5px solid #000;
+        border-radius: 20px;
+        font-size: 1rem;
+        font-weight: 600;
+        width: 30%;
+        padding: .5em 1em;
+    }
+}
+
+.delete_btn{
+    border: 1.5px solid red !important;
+    color: white;
+    background-color: red;
+}
+
+.img_ctnr{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    gap: .5em;
+    img{
+        border-radius: 20px;
+    }
+}

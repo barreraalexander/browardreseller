@@ -1,0 +1,218 @@
+.date_ordered{
+    font-size: .6rem !important;
+    color: $primary1;
+}
+.home_order_ctnr{
+    width: 100%;
+}
+
+.home_order{
+    border: 1px solid #c8c8c8;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+    padding: 2em;
+    margin-bottom: 1em;
+
+    position: relative;
+    p{
+        text-align: center;
+    }
+    a{
+        color: $primary1;
+        margin-top: 1em;
+    }
+    .model_id{
+        left: 0;
+        padding: 1em;
+        position: absolute;
+        top: 0;
+    }
+}
+
+.second_id{
+    top: 1.8em !important;
+
+}
+
+.money{
+    color: $primary2;
+
+}
+
+.user_info_ctnr{
+    border: 1px solid #000;
+    border-radius: 10px;
+    margin: .5em;
+    padding: .5em 1em;
+    width: 60%;
+    h2{
+        font-size: 1rem;
+    }
+    p{
+        font-size: .8rem;
+    }
+}
+
+
+
+.customer_info{
+    margin-top: .5em;
+    p{
+        font-size: 1rem;
+        font-weight: 600;
+    }
+}
+
+
+.goal_ctnr{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    gap: .5em;
+    margin-bottom: 1em;
+    div{
+        border-radius: 20px;
+        border: 1px solid #c8c8c8;
+        width: 40%;
+        padding: .5em;
+        p{
+            text-align: center;
+
+        }
+        span{
+            color: $primary2;
+        }
+    }
+    form{
+        width: 100%;
+        position: relative;
+
+        #submit_goal{
+            background-color: $primary2;
+            border-radius: 20px;
+            border: 1.5px solid $primary2;
+            color: #fff;
+            font-size: .7rem;
+            padding: .4em .8em;
+        }
+        p{
+            text-align: center;
+            color: $primary2;
+            font-size: .8rem;
+        }
+        div{
+            border: none;
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+            gap: .5em;
+        }
+    }
+}
+
+.order_total{
+    color: $primary2;
+    font-size: 1.5rem;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+    position: absolute;
+    right: .5em;
+    top: .5em;
+}
+
+.order_summary{
+    p{
+        font-size: .8rem;
+        padding: .2em;
+    }
+}
+
+.order_fulfilled{
+    text-align: center;
+    color: $primary3;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing:1.2px
+}
+
+.sale_link{
+    font-size: .8rem;   
+}
+
+.edit_item_ctnr{
+    form{
+        label{
+            font-weight: 600;
+            font-size: .8rem;
+            margin-bottom: 1em;
+        }
+        div{
+            margin-bottom: 1.5em;
+        }
+    }
+}
+
+.edit_details_ctnr{
+    h2{
+        font-weight: 700;
+        font-size: 1rem;
+    }
+}
+
+.colors_ctnr{
+    div{
+        margin-bottom: 0 !important;
+    }
+    input{
+        // margin: 0;
+    }
+}
+
+.condition_ctnr{
+    #obj_condition{
+        margin-bottom: 2em;
+    }
+    label{
+        margin-bottom: 1em;
+    }
+}
+
+.order_ctnr{
+    background-color: #f1f1f1;
+    border: 1px solid #c8c8c8;
+    border-radius: 10px;
+    margin: 1em 0;
+    padding: 1em;
+    width: 100%;
+    h1{
+        color: $primary1;
+        font-weight: 600;
+        font-size: 1.5rem;
+    }
+
+}
+
+
+.order_items_ctnr{
+    h2{
+        font-size: .9rem;
+        font-weight: 600;
+    }
+    p{
+        font-size: .8rem;
+        font-weight: 500;
+        margin-bottom: 1em;
+    }
+}
+
+.order_total2{
+    color: $primary2;
+    font-weight: 700 !important;
+    font-size: 1rem;
+}
+

@@ -2,20 +2,18 @@ from website import db
 from secrets import token_hex
 from datetime import datetime
 
-
-
 class Model:
     mtype = 'model'
     tablename = None
 
-    # !! CLASSMETHODS # !!
+    #//SECTION: DB METHODS
     @classmethod
     def add (cls, model):
         """ Model.add(model) inserts a new model
         into the databse. """
         ModelObj = cls._Model__getobj ()
-        insert_dict = ModelObj.get_insert_statement (model)
-        db.insert(insert_dict)
+        insert_statement = ModelObj.get_insert_statement (model)
+        db.insert(insert_statement)
 
     @classmethod
     def get (cls, by='', value='', getrandom=False, getall=False, getmany=False):
@@ -72,11 +70,7 @@ class Model:
         update_statement = ModelObj.get_update_statement (model)
         db.update(update_statement)
 
-    @classmethod
-    def __getobj (cls):
-        return cls
 
-#//SECTION:  STATIC METHODS
     @staticmethod
     def remove (model):
         """ model is deleted from the db,
@@ -84,148 +78,33 @@ class Model:
         already exists in the db. """
         db.remove(model)
 
+    @classmethod
+    def __getobj (cls):
+        return cls
 
 #//SECTION: __init__
     def __init__(self, mdict):
         self._id = ""
-        self.id = "" #accounts for some programs that use ._id as a built in
-        self.imgfiles = ""
-        self.updlate = ""
+        self.id = ""
+        self.upldate = ""
+        self.moddate = ""
         self.__checkdict (mdict)
 
     def __checkdict (self, mdict):
         try:
             self._id = mdict['_id']
             self.id = mdict ['_id']
-        except Exception as setid:
+        except Exception as err1:
+            print ('Model has no ID')
             self._id = token_hex(8)
-            self.id = token_hex(8)
-        
-        try:
-            self.imgfiles =  mdict['imgfiles']
-        except Exception as setimgfile:
-            self.imgfiles = None
+            self.id = self._id
 
         try:
             self.upldate = mdict ['upldate']
-        except Exception as setupldate:
-            self.upldate = None
+        except Exception as err3:
+            print ('Model has no Upload Date')
 
         try:
-            self.rating = mdict ['rating']
-        except Exception as setupldate:
-            self.rating = 0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# class Model:
-#     mtype = 'model'
-#     tablename = None
-#     def __init__(self, mdict):
-#         self._id = ""
-#         self.id = "" #accounts for some programs that use ._id as a built in
-#         self.imgfile = ""
-#         self.updlate = ""
-#         self.__checkdict (mdict)
-
-#     def __checkdict (self, mdict):
-#         if mdict == None:
-#             return None
-
-#         try:
-#             self._id = mdict['_id']
-#             self.id = mdict ['_id']
-#         except Exception as setid:
-#             self._id = token_hex(14)
-        
-#         try:
-#             self.imgfile =  "default.jpg"
-#         except Exception as setimgfile:
-#             self.imgfile = "default.jpg"
-
-#         try:
-#             self.upldate = mdict ['upldate']
-#         except Exception as setupldate:
-#             self.upldate = datetime.utcnow()
-
-
-#     @classmethod
-#     def get (cls, by='', value='', getrandom=False, getall=False, getmany=False):
-#         ModelObj = cls._Model__getobj ()
-
-#         if getmany:
-#             records = db.get(ModelObj.tablename, col=by,
-#                         value=value, getmany=True)
-#             models = [ModelObj(record) for record in records]
-#             return models
-
-#         if getall:
-#             records = db.get(ModelObj.tablename, getall=True)
-#             models = [ModelObj(record) for record in records]
-#             return models
-
-
-#         record = db.get(ModelObj.tablename, col=by, value=value, getrandom=getrandom)
-#         model = ModelObj (record)
-#         return model
-#         # if record:
-#         #     model = ModelObj (record)
-#         #     return model
-#         # return "nope"
-
-#     @staticmethod
-#     def add (model):
-#         try:
-#             db.insert (model)
-#             return True
-#         except Exception as modelinsert:
-#             print (f"db-model-insert-error for {model}")
-#             return False
-
-#     @staticmethod
-#     def remove (model):
-#         try:
-#             db.remove (model)
-#             return True
-#         except Exception as modelremove:
-#             print (f'db-model-remove-error for {model}')
-#             return False
-
-#     @staticmethod
-#     def update (model):
-#         db.update (model)
-#         try:
-#             db.update (model)
-#             return True
-#         except Exception as modelupdate:
-#             print (f'db-model-update-error for {model}')
-#             return False
-
-#     #!! HELPERS !!#
-#     @classmethod
-#     def __getobj (cls):
-#         return cls
-
+            self.moddate = mdict ['moddate']
+        except Exception as err4:
+            print ('Model has no Modified Date')

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <div class="login_div">
+        <form action="" method="POST">
+            {{login_form.hidden_tag()}}
+            {{login_form.login_email.label}}
+            {{login_form.login_email}}
+
+            {{login_form.login_password.label}}
+            {{login_form.login_password}}
+            
+            {{login_form.submit_login}}
+        </form>
+    </div>
+    <br>
+    <br>
+    <div class="register_div">
+        <form action="" method="POST">
+            {{register_form.hidden_tag()}}
+            {{register_form.register_email.label}}
+            {{register_form.register_email}}
+
+            {{register_form.register_password.label}}
+            {{register_form.register_password}}
+
+
+            {{register_form.f_name.label}}
+            {{register_form.f_name}}
+            
+            {{register_form.l_name.label}}
+            {{register_form.l_name}}
+
+            {{register_form.submit_register}}
+        </form>
+    </div>
+
+
+</form>
+
+{% endblock %}

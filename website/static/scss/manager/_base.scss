@@ -1,0 +1,30 @@
+#base_manager_aside_section{
+    aside{
+        background-color: $primary4;
+        margin: 0;
+        padding: .5em 0;
+        position: relative;
+        width: 100%;
+        max-height: fit-content;
+    }
+    ul{
+        display: flex;
+        flex-flow: row wrap;
+        list-style: none;
+        padding: 0;
+        row-gap: 1em;
+    }
+    li{
+        width: 50%;
+        text-align: center;
+    }
+    a{
+        text-decoration: none;
+        color: #000;
+        font-weight: 500;
+        font-size: 1rem;
+    }
+}
+a{
+    color: #000;
+}
