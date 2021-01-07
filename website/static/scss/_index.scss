@@ -108,3 +108,31 @@
         width: 100%;
     }
 }
+
+
+#ann_slider{
+    overflow: hidden;
+    position: relative;
+    .selling_price{
+        color: #000;
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-weight: 600;
+        text-decoration: line-through;
+    }
+    .discount{
+        color: $primary2;
+        position: absolute;
+        top: 1.5em;
+        left: 0;
+        font-weight: 600;
+
+
+    }
+    img{
+        top: -.5em;
+        position: absolute;
+        right: 0;
+    }
+}

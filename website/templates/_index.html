@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <!-- //SECTION: index_section1 -->
 <section id="index_section1">
     <div>
-        <p>slider of announcments</p>
+        <p>
+            {{slider_item.name}}
+        </p>
         <div id="maxim_svg_ctnr">
             <svg id="maxim_svg" viewBox="0 0 32.543 32.146">
                 <g id="maximize-white" transform="translate(-206.574 -216.574)">
@@ -22,6 +23,7 @@
                 </g>
             </svg>            
         </div>
+
         <div id="minim_svg_ctnr" class="invisible">
             <svg viewBox="0 0 129.569 129.569">
                 <g id="minimize-white" transform="translate(-222.216 -232.216)">
@@ -39,11 +41,17 @@
               </svg>
         </div>
     </div>
+
     <div id="ann_slider_ctnr" class="invisible">
         <div id="ann_slider">
-
+            <p class="selling_price">
+                THEN: ${{slider_item.selling_price}}
+            </p>
+            <p class="discount">
+                NOW: ${{slider_item.selling_price}}
+            </p>
+            <img src="{{ url_for('static', filename='images/item_images/'+slider_item._id+'/thumbnails/'+slider_item.imgfiles[0])}}" alt="shoes">
         </div>
-
     </div>
 </section>
 
@@ -51,7 +59,9 @@
 <section id="index_section2">
     <div id="main_item_ctnr">
         <div>
-            <p>something promotional</p>
+            <p>
+                {{promo_item.name}}
+            </p>
         </div>
     </div>
     <button class="btn_filled">

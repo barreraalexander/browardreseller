@@ -20,7 +20,10 @@ def index ():
     flexs = [ ItemFlexy.get_model_flexy(model) \
             for model in models ]
 
-    return render_template('_index.html', models=models, flexs=flexs)
+    promo_item = Item.get(by="_id", value="fa9f2a892e7239c9a6086539d776")
+    slider_item = Item.get(by="_id", value="fe6cf011aae691791ea17c9834f8")
+
+    return render_template('_index.html', models=models, flexs=flexs, promo_item=promo_item, slider_item=slider_item)
 
 @main.route ("/inventory/<string:model_id>", methods=["GET", "POST"])
 def inv_item (model_id):
