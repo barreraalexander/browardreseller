@@ -241,3 +241,17 @@
     font-weight: 600;
     font-size: .7rem;
 }
+
+.promo_img_ctnr{
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 1em;
+    margin-top: 2em;
+    padding: .5em;
+
+    img{
+        border: 1px solid transparent;
+        border-radius: 20px;
+        width: 45%;
+    }
+}

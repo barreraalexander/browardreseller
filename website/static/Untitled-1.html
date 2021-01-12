@@ -2,18 +2,27 @@
     <h1 class="display-4"> Inventory </h1>
     
     <div class="container">
-        <h5>Stats</h5>
-        <p>{{models|length}} Items</p>
-        <p> Uploaded </p>
-        <p> Sold </p>
-    
+        <h5>
+            Stats
+        </h5>
+        <p>
+            {{models|length}} Items
+        </p>
+        <p>
+            Uploaded
+        </p>
+        <p>
+            Sold
+        </p>
     </div>
     
     <div class="container p-2">
         <h5>Categories</h5>
         <div class="btn-group">
             {% for CATEGORY in CATEGORIES %}
-                <button class="btn btn-primary" onclick="CategoryFilter('{{CATEGORY}}')" > {{CATEGORY}} </button>
+                <button class="btn btn-primary" onclick="CategoryFilter('{{CATEGORY}}')" >
+                    {{CATEGORY}} 
+                </button>
             {% endfor %}
         </div>
     </div>

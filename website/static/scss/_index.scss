@@ -2,6 +2,7 @@
 #index_section1{
     background-color: $primary2;
     height: 2em;
+    // padding: .5em;
     div{
         gap: 2em;
         padding: 0 2em;
@@ -12,8 +13,10 @@
     p{
         align-self: center;
         color: #fff;
-        padding: .2em;
+        padding: .8em;
         text-align: center;
+        font-size: .8rem;
+        margin: 0;
     }
     img{
         margin: .3em;
@@ -28,12 +31,16 @@
     background-color: $primary3;
     height: 25em;
     padding: .5em;
+    a{
+        text-decoration: none;
+        color: #000;
+    }
 
 }
 
 //SECTION: index_section3
 #index_section3{
-    
+
 }
 
 

@@ -50,7 +50,7 @@
             <p class="discount">
                 NOW: ${{slider_item.selling_price}}
             </p>
-            <img src="{{ url_for('static', filename='images/item_images/'+slider_item._id+'/thumbnails/'+slider_item.imgfiles[0])}}" alt="shoes">
+            <img src="{{ url_for('static', filename='images/item_images/'+slider_item._id+'/thumbnails/'+slider_item.imgfiles[0])}}" alt="slider item">
         </div>
     </div>
 </section>
@@ -59,9 +59,15 @@
 <section id="index_section2">
     <div id="main_item_ctnr">
         <div>
-            <p>
-                {{promo_item.name}}
-            </p>
+            <a href="{{ url_for('main.inv_item', model_id=promo_item._id) }}">
+                <p>
+                    {{promo_item.name}}
+                </p>
+            </a>
+        </div>
+        <div class="promo_img_ctnr">
+            <img src="{{ url_for('static', filename='images/item_images/'+promo_item._id+'/'+promo_item.imgfiles[0])}}" alt="promotional item">
+            <img src="{{ url_for('static', filename='images/item_images/'+promo_item._id+'/'+promo_item.imgfiles[1])}}" alt="promotional item">
         </div>
     </div>
     <button class="btn_filled">
