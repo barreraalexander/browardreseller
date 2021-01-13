@@ -3,10 +3,12 @@
 {% block content %}
 <!-- //SECTION: index_section1 -->
 <section id="index_section1">
-    <div>
-        <p>
-            {{slider_item.name}}
-        </p>
+    <div class="slider_heading_ctnr">
+        <a href="{{ url_for('main.inv_item', model_id=slider_item._id) }}">
+            <p>
+                {{slider_item.name}}
+            </p>
+        </a>
         <div id="maxim_svg_ctnr">
             <svg id="maxim_svg" viewBox="0 0 32.543 32.146">
                 <g id="maximize-white" transform="translate(-206.574 -216.574)">
@@ -27,32 +29,44 @@
         <div id="minim_svg_ctnr" class="invisible">
             <svg viewBox="0 0 129.569 129.569">
                 <g id="minimize-white" transform="translate(-222.216 -232.216)">
-                  <g id="arrow" transform="translate(630.384 109.886) rotate(135)">
+                    <g id="arrow" transform="translate(630.384 109.886) rotate(135)">
                     <line id="Line_1" data-name="Line 1" x2="74" transform="translate(286.5 110.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5"/>
                     <line id="Line_2" data-name="Line 2" x2="23" y2="23" transform="translate(337.5 87.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5"/>
                     <line id="Line_3" data-name="Line 3" y1="23" x2="23" transform="translate(337.5 110.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5"/>
-                  </g>
-                  <g id="arrow-2" data-name="arrow" transform="translate(-56.384 484.114) rotate(-45)">
+                    </g>
+                    <g id="arrow-2" data-name="arrow" transform="translate(-56.384 484.114) rotate(-45)">
                     <line id="Line_1-2" data-name="Line 1" x2="74" transform="translate(286.5 110.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5"/>
                     <line id="Line_2-2" data-name="Line 2" x2="23" y2="23" transform="translate(337.5 87.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5"/>
                     <line id="Line_3-2" data-name="Line 3" y1="23" x2="23" transform="translate(337.5 110.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5"/>
-                  </g>
+                    </g>
                 </g>
-              </svg>
+                </svg>
         </div>
     </div>
 
     <div id="ann_slider_ctnr" class="invisible">
         <div id="ann_slider">
-            <p class="selling_price">
-                THEN: ${{slider_item.selling_price}}
-            </p>
-            <p class="discount">
-                NOW: ${{slider_item.selling_price}}
-            </p>
-            <img src="{{ url_for('static', filename='images/item_images/'+slider_item._id+'/thumbnails/'+slider_item.imgfiles[0])}}" alt="slider item">
+            <div class="pricing_ctnr">
+                <h5>
+                    DISCOUNT
+                </h5>
+                <p class="selling_price">
+                    THEN: ${{slider_item.selling_price}}
+                </p>
+                <p class="discount">
+                    NOW: ${{slider_item.reduced_price}}
+                </p>
+                <p class="sale_end">
+                    SAVE {{slider_item.reduction}}%
+                </p>
+                <p class="sale_end">
+                    {{slider_item.sale_daysleft}} DAYS LEFT
+                </p>
+            </div>
+            <img class="promo_item_img" src="{{ url_for('static', filename='images/item_images/'+slider_item._id+'/'+slider_item.imgfiles[0])}}" alt="slider item">
         </div>
     </div>
+
 </section>
 
 <!-- //SECTION: index_section2 -->
