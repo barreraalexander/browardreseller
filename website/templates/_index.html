@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <!-- //SECTION: index_section1 -->
 <section id="index_section1">
     <div class="slider_heading_ctnr">
@@ -9,6 +10,10 @@
                 {{slider_item.name}}
             </p>
         </a>
+        <div class="empty_div"></div>
+        <!-- <p>
+            ON SALE NOW
+        </p> -->
         <div id="maxim_svg_ctnr">
             <svg id="maxim_svg" viewBox="0 0 32.543 32.146">
                 <g id="maximize-white" transform="translate(-206.574 -216.574)">
@@ -63,7 +68,15 @@
                     {{slider_item.sale_daysleft}} DAYS LEFT
                 </p>
             </div>
-            <img class="promo_item_img" src="{{ url_for('static', filename='images/item_images/'+slider_item._id+'/'+slider_item.imgfiles[0])}}" alt="slider item">
+            <div class="slider_img_ctnr">
+                {% for imgfile in slider_item.imgfiles %}
+                    {% if loop.index == 1 %}
+                        <img src="{{ url_for('static', filename='images/item_images/'+slider_item._id+'/'+slider_item.imgfiles[loop.index-1])}}" alt="slider item">
+                    {% else %}
+                        <img class="invisible show_on_tablet" src="{{ url_for('static', filename='images/item_images/'+slider_item._id+'/'+slider_item.imgfiles[loop.index-1])}}" alt="slider item">
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 
@@ -80,33 +93,44 @@
             </a>
         </div>
         <div class="promo_img_ctnr">
-            <img src="{{ url_for('static', filename='images/item_images/'+promo_item._id+'/'+promo_item.imgfiles[0])}}" alt="promotional item">
-            <img src="{{ url_for('static', filename='images/item_images/'+promo_item._id+'/'+promo_item.imgfiles[1])}}" alt="promotional item">
+            {%for img_f in promo_item.imgfiles%}
+                <img src="{{ url_for('static', filename='images/item_images/'+promo_item._id+'/'+promo_item.imgfiles[loop.index-1])}}" alt="promotional item">
+            {% endfor %}
+
         </div>
     </div>
-    <button class="btn_filled">
+    <button onclick="redir( '{{ url_for('main.inv_item', model_id=promo_item._id) }}' )" class="btn_filled">
         LEARN MORE
     </button>
 </section>
 
 <!-- //SECTION: index_section3 -->
 <section id="index_section3">
-    <h2 class="h2_banner">FEATURED FOOTWEAR</h2>
+    <h2 class="h2_banner">
+        FEATURED FOOTWEAR
+    </h2>
     <div class="items_flex">    
-        {{flexs[0]}}
-        {{flexs[1]}}
+        {{flexs[7]}}
+        {{flexs[8]}}
         {{flexs[2]}}
         {{flexs[3]}}
+    </div>
 </section>
-
+    
+<!-- //SECTION: index_section4 -->
 <section id="index_section4">
-    <h2 class="h2_banner"> TRENDING </h2>
+    <h2 class="h2_banner">
+        TRENDING
+    </h2>
     <div class="items_flex">
         {{flexs[4]}}
         {{flexs[5]}}
+        {{flexs[11]}}
+        {{flexs[10]}}
     </div>
 </section>
 
+<!-- //SECTION: index_section5 -->
 <section id="index_section5">
     <div class="filter_ctnr">
         <ul>
@@ -121,7 +145,6 @@
                 ON SALE!
             </p>
             <div class="circ">
-                
             </div>
         </div>
         <div class="item_badge_blue">
@@ -151,13 +174,15 @@
     </div>
 </section>
 
-<section id="index_section6">
-    <h3>
-        BUY SOMETHING PLZ :)
-    </h3>
-</section>
-<p id='temp_id' class='invisible' > </p>
-{% endblock content %}
+<!-- //SECTION: index_section6 -->
+    <section id="index_section6">
+        <h3>
+            BUY SOMETHING PLZ :)
+        </h3>
+    </section>
+
+    <p id='temp_id' class='invisible' > </p>
+    {% endblock content %}
 
 
 

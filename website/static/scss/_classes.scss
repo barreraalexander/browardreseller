@@ -1,15 +1,3 @@
-.badge_ctnr{
-    column-gap: 2em;
-    display: grid;
-    grid-template-rows: 4em 4em;
-    grid-template-columns: 8em 8em;
-    justify-content: center;
-    margin: 0 auto;
-    margin-top: 5em;
-    padding: 0;
-    row-gap: 2em;
-    width: 100%;
-}
 
 .btn_filled{
     @include cta_btn;
@@ -37,16 +25,7 @@
     border: 2px solid $primary1;
 }
 
-.circ{
-    background-color: #fff;
-    border: 1px solid transparent;
-    border-radius: 20px;
-    bottom: 5px;
-    height: 2.8em;
-    position: absolute;
-    right: 12px;
-    width: 2.8em !important;
-}
+
 
 .color_circ{
     border-radius: 100px;
@@ -88,9 +67,7 @@
 }
 
 
-.filter_ctnr{
-    display: none;
-}
+
 
 
 
@@ -129,19 +106,18 @@
 }
 
 
-
-.item_badge_blue{
-    @include item_badge;
-    background-color: $primary1;
+.flex_item_price{
+    color: $primary2;
+    font-size: 1.3rem !important;
+    font-weight: 600;
 }
 
-.item_badge_green{
-    @include item_badge;
-    background-color: $primary2;
+.flex_item_shipping{
+    color: $primary3;
 }
-.item_badge_yellow{
-    background-color: $primary3;
-    @include item_badge;
+
+.flexy_cta{
+    font-size: 1.2rem;
 }
 
 
@@ -201,21 +177,3 @@
     font-weight: 600;
     font-size: .7rem;
 }
-
-.promo_img_ctnr{
-    display: flex;
-    flex-flow: row nowrap;
-    gap: 1em;
-    justify-content: center;
-    margin-top: 2em;
-    padding: .5em;
-    img{
-        border: 1px solid transparent;
-        border-radius: 20px;
-        width: 8em;
-    }
-}
-
-// .promo_item_img{
-//     width: 30%;
-// }

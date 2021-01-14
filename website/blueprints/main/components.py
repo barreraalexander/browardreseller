@@ -20,7 +20,11 @@ class ItemFlexy:
                     {model.name}
                 </p>
             </a>
-            <p style='color:green;margin-left:5em;margin-top:1em;'> ${model.selling_price} </p>
+            <p class='flex_item_price'> ${model.selling_price} </p>
+            <p class='flex_item_shipping'> Shipping: ${model.shipping_price} </p>
+            <button class='btn_filled flexy_cta'>
+                Add to Cart
+            </button>
         </div>
                 """)
     def __init__(self):

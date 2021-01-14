@@ -47,3 +47,20 @@ p:last-of-type{
         justify-content: space-around;
     }
 }
+
+//SECTION: MEDIA QUERIES 
+@media only screen and (min-width:$tablet_bp){
+    #base_aside_section{
+        height: 4em;
+        padding: 1em;
+        padding-bottom: 4em;
+        a{
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+    }
+
+}
+
+@media only screen and (min-width:$desktop_bp){
+}

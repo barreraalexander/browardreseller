@@ -1,23 +1,26 @@
 //SECTION: index_section1
 #index_section1{
     background-color: $primary2;
-    height: 3em;
     padding: .8em .5em;
     a{
         text-decoration: none;
     }
     .slider_heading_ctnr{
+        align-content: baseline;
         display: flex;
         flex-flow: row nowrap;
         gap: 1em;
         justify-content: flex-end;
-        align-content: baseline;
+        max-width: 600 px;
         p{
             color: #fff;
             font-size: .8rem;
             font-weight: 600;            
             text-align: center;
-        }   
+        }    
+    }
+    .empty_div{
+        width: 10%;
     }
 }
 
@@ -27,7 +30,6 @@
     display: flex;
     flex-flow: row nowrap;
     gap: 2em;
-    height: 10em;
     justify-content: center;
     margin: 1em;
     padding: 1em;
@@ -40,10 +42,20 @@
     img{
         border: 1px solid transparent;
         border-radius: 20px;
+
     }
     p{
         font-size: .8rem;
         font-weight: 600;
+    }
+    .slider_img_ctnr{
+        display: flex;
+        flex-flow: row nowrap;
+        max-width: 500px;
+        width: 70%;
+        img{
+            width: 100%;
+        }
     }
     .pricing_ctnr{
         display: flex;
@@ -56,8 +68,9 @@
         }
     }
     .sale_end{
-        color: $primary3;
-        font-size: .6rem;
+        // color: $primary3;
+        color: #000;
+        font-size: .7rem;
     }
     .selling_price{
         color: red;
@@ -81,8 +94,12 @@
 //SECTION: index_section2
 #index_section2{
     background-color: $primary3;
-    height: 25em;
     padding: .5em;
+    padding-bottom: 1em;
+    min-width: 350px;
+    .btn_filled{
+        font-size: 1rem;
+    }
     a{
         text-decoration: none;
         color: #000;
@@ -90,13 +107,41 @@
 
 }
 
+#main_item_ctnr{
+    background-color: $primary4;
+    border-radius: 10px;
+    display: block;
+    margin: 1em auto;
+    padding: .5em;
+    // height: 80%;
+    max-width: 600px;
+    width: 80%;
+    p{
+        font-weight: 600;
+        font-size: 1rem;
+    }
+}
+
+.promo_img_ctnr{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1em;
+    justify-content: center;
+    margin-top: 2em;
+    padding: .5em;
+    img{
+        // overflow: hidden; 
+        border: 1px solid transparent;
+        border-radius: 20px;
+        width: 30%;
+        max-width: 600px;
+    }
+}
+
 
 //SECTION: index_section3
 #index_section3{
-    a{
-        text-decoration: none;
-        color: #000;
-    }
+    padding: 1em;
 }
 
 .items_flex{
@@ -105,30 +150,37 @@
     gap: 1em;
     justify-content: space-evenly;
     width: 100%;
+    a{
+        text-decoration: none;
+        color: #000;
+    }
+    .item_flexy_ctnr:nth-child(3), .item_flexy_ctnr:nth-child(4){
+        display: none;
+    }
 }
 
 .item_flexy_ctnr{
     background-color: $primary4;
     border-radius: 10px;
-    height: 18em;
     margin: 1em;
+    max-width: 350px;
     padding: 1em;
-    width: 8em;    
+    width: 35%;    
 
     align-content: baseline;
     display: flex;
     flex-flow: column nowrap;
     gap: 1em;
-    justify-content: center;
+    justify-content: flex-end;
     img{
         border: 1px solid transparent;
         border-radius: 10px;
         width: 90%;
     }
     p{
-        font-size: .8rem;
+        font-size:  1rem;
         font-weight: 600;
-        text-align: left;
+        text-align: center;
     }
 }
 
@@ -141,20 +193,64 @@
     padding-bottom: .5em;
     h2{
         color: #fff !important;
-    }
-    
+    }    
 }
 
 //SECTION: index_section5
 #index_section5{  
-    height: 20em;
     background-color: $primary4;
     display: flex;
+    padding: 5em;
     flex-flow: row nowrap;
-    div{
-        width: 100%;
+}
+
+
+.badge_ctnr{
+    display: grid;
+    grid-template-rows: 4em 4em;
+    grid-template-columns: 8em 8em;
+    justify-content: center;
+    gap: 4em;
+    width: 100%;
+}
+
+.circ{
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    bottom: 5px;
+    height: 2.8em;
+    position: absolute;
+    right: 12px;
+    width: 2.8em !important;
+}
+
+.item_badge_blue{
+    @include item_badge;
+    background-color: $primary1;
+}
+
+.item_badge_green{
+    @include item_badge;
+    background-color: $primary2;
+}
+.item_badge_yellow{
+    @include item_badge;
+    background-color: $primary3;
+    p{
+        color: #000;
     }
 }
+
+
+.filter_ctnr{
+    display: none;
+}
+
+
+
+
+
 
 //SECTION: index_section6
 #index_section6{
@@ -166,25 +262,87 @@
         letter-spacing: 3px;
         font-weight: 900;
         font-size: 1.5rem;
-        padding-top: 5em;
+        padding-top: 2em;
         text-align: center;
     }
 }
 
 
-//SECTION: VARIOUS RULESETS ONLY ON INDEX
+//SECTION: MEDIA_QUERIES
+@media only screen and (min-width:$tablet_bp){
+    .show_on_tablet{
+        display: block;
+    }
+    .item_flexy_ctnr{
+        width: 35%;
+        padding: 3em;
+        margin: 1em;
+        padding-top: 3em;
+        img{
+            margin-top: 1em;
+        }
+    }
+    #index_section1{
+        height: fit-content;
+        padding: 1em;
+        .slider_img_ctnr{
+            gap: 2em;
+            justify-content: center;
+            img{
+                width: 40%;
+            }
+        }
+        .slider_heading_ctnr{
+            p{
+                font-size: 1.5rem;
+            }            
+        }
+        .pricing_ctnr{
+            h5{
+                font: 700;
+                font-size: 1.5rem;
+            }
+            p{
+                font-weight: 600;
+                font-size: 1.2rem;
+            }
+        }
+        #maxim_svg_ctnr, #minim_svg_ctnr{
+            width: 4em;
+        }
+    }
+    #index_section2{
+        #main_item_ctnr{
+            padding: 3em;
+            p{
+                font-size: 2rem;
+            }            
+        }
+        .promo_img_ctnr{
+            gap: 2em;
+        }
+    }
+    #index_section3{
+        .item_flexy_ctnr:nth-child(3), .item_flexy_ctnr:nth-child(4){
+            display: block;
+        }
+    }
+    #index_section6{
+        h3{
+            font-size: 3rem;
+        }
+    }
+}
 
-
-#main_item_ctnr{
-    background-color: $primary4;
-    border-radius: 10px;
-    display: block;
-    margin: 1em auto;
-    padding: .5em;
-    height: 80%;
-    width: 80%;
-    p{
-        font-weight: 600;
+@media only screen and (min-width:$desktop_bp){
+    .desktop_main{
+        padding: 5em;
+        background-color: $primary4;
+    }
+    #index_section1{
+    }
+    #maxim_svg_ctnr, #minim_svg_ctnr{
+        display: none;
     }
 }
 
