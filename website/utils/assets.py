@@ -2,7 +2,7 @@ from flask_assets import Bundle
 
 bundles = {
     'main_scss': Bundle(
-        'scss/main.scss',
+        'scss/main/main.scss',
         filters='libsass',
         depends='scss/*.scss',
         output='gen/css/main.%(version)s.css'
@@ -16,7 +16,6 @@ bundles = {
     'main_js': Bundle(
         'js/AjaxOps.js',
         'js/CheckUser.js',
-        # 'js/StorageOps.js',
         'js/SubmitForms.js',
         'js/ModInterface.js',
         'js/Redir.js',

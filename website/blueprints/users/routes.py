@@ -6,8 +6,8 @@ from website.models.order import Order
 from website.models.user import User
 from flask import render_template, url_for,\
                   redirect, request, Blueprint
-users = Blueprint ('users', __name__)
 
+users = Blueprint ('users', __name__)
     
 @users.route ('/cart', methods=['GET', 'POST'])
 def cart ():
@@ -42,7 +42,7 @@ def cart ():
 
 
     sell_divs = [ItemDiv.get_sell_div(model) for model in models]
-    return render_template('_cart.html', title='Cart', models=models, cart=user.cart, order_form=order_form, remove_form=remove_form, sell_divs=sell_divs)
+    return render_template('/users/_cart.html', title='Cart', models=models, cart=user.cart, order_form=order_form, remove_form=remove_form, sell_divs=sell_divs)
 
 @users.route('/checkout/<string:model_id>', methods=['GET', 'POST'])
 def checkout (model_id):
@@ -88,6 +88,6 @@ def checkout (model_id):
         print (new_order)
         return redirect( url_for('main.index') )
 
-    return render_template('_checkout.html', checkout_form=checkout_form,
+    return render_template('/users/_checkout.html', checkout_form=checkout_form,
                                              order_summary=order_summary,
                                              inv_models=inv_models)

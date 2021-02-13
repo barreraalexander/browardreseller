@@ -1,9 +1,9 @@
 //SECTION: needs to load first 
-@import '../_variables.scss';
-@import '../_mixins.scss';
-@import '../_classes.scss';
+@import '../main/_variables.scss';
+@import '../main/_mixins.scss';
+@import '../main/_classes.scss';
 @import '_classes.scss';
-@import '../_base.scss';
+@import '../main/_base.scss';
 @import '_base.scss';
 //SECTION: scss
 @import '_home.scss';
@@ -11,7 +11,3 @@
 @import '_inventory.scss';
 @import '_open_orders.scss';
 @import '_sales.scss';
-// @import '_cart.scss';
-// @import '_cart.scss';
-// @import '_index.scss';
-// @import '_inv_item.scss';

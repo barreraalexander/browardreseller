@@ -16,6 +16,24 @@ main = Blueprint ('main', __name__)
 
 @main.route ("/", methods=["GET", "POST"])
 def index ():
+    form = AddtoCart()
+
+    if request.method == "POST":
+        if form.validate_on_submit and form.submit_atc.data:
+            model_id = f"{form.item_id.data}$"
+            ip_requesting = request.remote_addr
+            user = User.get(by='ip_address', value=ip_requesting)
+
+            if user:
+                pass
+            else:
+                user = User.get_temp_user(ip_requesting)
+                User.add(user)
+    
+            user.cart += model_id
+            User.update(user)
+            return redirect( url_for('main.index') )
+
     models = Item.get(getall=True)
     
     flexs = [ ItemFlexy.get_model_flexy(model) \
@@ -31,9 +49,12 @@ def index ():
     slider_item.sale_start = datetime(year=2021, month=1, day=6)
     slider_item.sale_end = datetime(year=2021, month=2, day=26)
     slider_item.sale_daysleft = str(slider_item.sale_end - datetime.now()).split(',')[0].split(' ')[0]
-    print (slider_item.sale_start)
 
-    return render_template('_index.html', models=models, flexs=flexs, promo_item=promo_item, slider_item=slider_item)
+
+
+    return render_template('/main/_index.html', models=models,\
+                            flexs=flexs, promo_item=promo_item,\
+                            slider_item=slider_item, form=form)
 
 @main.route ("/inventory/<string:model_id>", methods=["GET", "POST"])
 def inv_item (model_id):
@@ -56,5 +77,5 @@ def inv_item (model_id):
             User.update(user)
             return redirect( url_for('main.index') )
 
-    return render_template('_inv_item.html', model=model, form=form)
+    return render_template('/main/_inv_item.html', model=model, form=form)
 

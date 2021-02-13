@@ -41,7 +41,7 @@ def add_item (user_id):
             print ('ran')           
             flash (f"Added {new_item.name} to Inventory {form.obj_condition.data} {form.uploaded_to.data} {form.c_type.data}")
             return redirect(url_for('managers.inventory', user_id=current_user._id))
-    return render_template('_add_item.html', form=form)
+    return render_template('managers/_add_item.html', form=form)
 
 
 
@@ -71,6 +71,7 @@ def backstage():
                 'l_name' : register_form.l_name.data,
                 'email' : register_form.register_email.data,
                 'password' : register_form.register_password.data,
+                'goal' : 0,
             }
             new_manager = Manager(mdict)
             enc_password = bcrypt.generate_password_hash(new_manager.password).decode('utf8')
@@ -87,7 +88,7 @@ def backstage():
                 return redirect(url_for('managers.backstage'))
 
     print (current_user.is_authenticated)
-    return render_template ('_backstage.html', login_form=login_form, register_form=register_form)
+    return render_template ('managers/_backstage.html', login_form=login_form, register_form=register_form)
 
 
 @managers.route('/backstage/u/<user_id>/home', methods=['POST', 'GET'])
@@ -123,7 +124,7 @@ def home(user_id):
     else:
         current_user.perc_goal = 0
 
-    return render_template('_home.html', open_orders=open_orders, form=form)
+    return render_template('managers/_home.html', open_orders=open_orders, form=form)
 
 
 @managers.route ('/backstage/<user_id>/inventory')
@@ -131,7 +132,7 @@ def home(user_id):
 def inventory (user_id):
     models = Item.get(getall=True)
     sorted_models = []
-    return render_template('_inventory.html', models=models, CATEGORIES=CATEGORIES)
+    return render_template('managers/_inventory.html', models=models, CATEGORIES=CATEGORIES)
 
 
 
@@ -173,7 +174,7 @@ def inv_item_m(model_id, user_id):
             return redirect(url_for('managers.inventory', user_id=current_user._id))
 
 
-    return render_template('_inv_item_m.html', model=model, form=form)
+    return render_template('managers/_inv_item_m.html', model=model, form=form)
 
 
 @managers.route('/backstage/<user_id>/open_orders', methods=['GET'])
@@ -186,7 +187,7 @@ def open_orders(user_id):
         for item in model.items:
             print (item.name)
         # print (model.items)
-    return render_template('_open_orders.html', models=models)
+    return render_template('managers/_open_orders.html', models=models)
 
 @managers.route('/backstage/<user_id>/open_orders/<string:model_id>', methods=['GET', 'POST'])
 def open_order(model_id, user_id):
@@ -221,7 +222,7 @@ def open_order(model_id, user_id):
 
             return redirect(url_for('managers.open_order', model_id=order._id, user_id=user_id))
 
-    return render_template('_open_order.html', order=order,
+    return render_template('managers/_open_order.html', order=order,
                                             user=user, form=form,
                                             items_totals=items_totals,
                                             items_ordered=items_ordered,
@@ -235,14 +236,14 @@ def sales(user_id):
     for model in models:
         model.manager = Manager.get(by='_id', value=model.manager_id)
         model.user = User.get(by='_id', value=model.user_id)
-    return render_template('_sales.html', models=models)
+    return render_template('managers/_sales.html', models=models)
 
 
 @managers.route('/backstage/<user_id>/sales/<string:model_id>', methods=['GET'])
 @login_required
 def sale(model_id):
     model = Sale.get(by='_id', value=model_id)
-    return render_template('_sale.html', model=model)
+    return render_template('managers/_sale.html', model=model)
 
 
 @managers.route('/backstage/<user_id>/logout')
@@ -250,9 +251,3 @@ def sale(model_id):
 def logout():
     logout_user()
     return redirect(url_for('managers.backstage'))
-
-
-
-
-
-# @manager.route('/money_manager', methods=['GET`'])

@@ -8,7 +8,7 @@ class DBConfig:
 
 
 cacheConfig = {
-    "DEBUG": False,          # some Flask specific configs
-    "CACHE_TYPE": "simple", # Flask-Caching related configs
+    "DEBUG": False,
+    "CACHE_TYPE": "simple",
     "CACHE_DEFAULT_TIMEOUT": 300
 }
