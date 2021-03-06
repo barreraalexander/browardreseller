@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section>
+    <h1 class="display-4">Not Uploaded</h1>
+    <div class="container">
+    <p class="text-muted">{{models|length}} Left</p>
+        {%for model in models%}
+        <div class="container" style="border: .10em solid rgb(0, 0, 0); margin: .10em">
+            <a href="{{ url_for('main.inv_item', item_id=model._id) }}" class="nav-link">
+                <h3> {{model.name}} </h3>
+                <small class="text-muted"> ID: {{ model._id }}</small>
+            </a>
+            <hr>
+            
+            <h5 class="bg-primary text-white">DETAILS</h5>
+            <p> Name: <br> {{model.name}} </p>
+            <p> Description: <br> {{model.details}} </p>
+            <p> Category: <br> {{model.category}} </p>
+            <p> Type: <br> {{model.c_type}} </p>
+            <p> Size: <br> {{model.size}} </p>
+            <p> Name: <br> {{model.name}} </p>
+            <p> Condition: <br> {{model.obj_condition}} </p>
+            <p> Model: <br> {{model.model_num}}  </p>
+            <hr>
+
+
+            
+            <h5 class="bg-primary text-white">PRICE</h5>
+            <p> PURCHASE FOR: ${{model.purchase_price}} </p>
+            <p> SELLING FOR: ${{model.selling_price}} </p>
+            <p> SHIPPING FOR: ${{model.shipping_price}} </p>
+            <hr>
+
+            <h5 class="bg-primary text-white">IMAGES</h5>
+            <div class="container" stye="right: 0em;">
+                {% for imgfile in model.imgfiles %}
+                    <img class="img-fluid" src="{{ url_for('static', filename='images/item_images/'+model._id+'/thumbnails/'+imgfile)}}">
+                {% endfor %}
+            </div>
+            <p class='text-nowrap bg-success text-white'>PATH <br> C:\Users\barre\OneDrive\prog\portfolio\project_vendor\browardreseller\static\images\item_images\{{model._id}} </p>
+            <hr>
+
+            <p>Upload To: {{model.uploaded_to}}</p>
+
+            <form action="" method="POST" class="form-group" enctype="multipart/form-data">
+                {{form.hidden_tag()}}
+                <fieldset class="form-group">
+                    <div class="form-group">
+                        <div id="item" name="item" class="form-control" >
+                            {% for choice in form.item_id.choices%}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="choice{{loop.index}}" name="item_id" value={{model._id}}>
+                                    <label class="form-check-label" for="choice{{loop.index}}"> {{model._id}} </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{form.submit_upload_item(class="btn btn-outline-info")}}
+                </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

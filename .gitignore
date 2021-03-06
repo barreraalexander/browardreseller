@@ -1,7 +1,7 @@
-website/static/gen
-website/static/.webassets-cache
+gen
+.webassets-cache
 website/static/images
-website/webhandlers
+webhandlers
 __pycache__
 progress.txt
 **.vscode

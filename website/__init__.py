@@ -7,8 +7,6 @@ from website.db import DB
 from website.config import DBConfig, cacheConfig
 from website.utils.assets import bundles
 
-
-
 assets = Environment()
 bcrypt = Bcrypt()
 cache = Cache(config=cacheConfig)
@@ -22,8 +20,6 @@ login_manager = LoginManager()
 login_manager.login_view = 'managers.backstage'
 login_manager.login_message_category = 'info'
 
-
-
 def create_app (config_class=DBConfig):
     app = Flask (__name__)
     app.config.from_object(DBConfig)
@@ -36,11 +32,9 @@ def create_app (config_class=DBConfig):
     login_user.init_app(app)
     login_manager.init_app(app)
 
-    from website.blueprints.main.routes import main
     from website.blueprints.managers.routes import managers
     from website.blueprints.users.routes import users
 
-    app.register_blueprint  (main)
     app.register_blueprint  (managers)
     app.register_blueprint  (users)
 

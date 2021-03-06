@@ -1,0 +1,94 @@
+{% extends 'base_manager.html' %}
+
+{% block content %}
+
+
+<main>
+<!-- //SECTION: home_section1 -->
+    <section id="home_section1">
+        <div>
+            <h1>
+                Open Orders
+            </h1>
+            {% if open_orders %}
+                <div class="home_order_ctnr">
+                    {% for order in open_orders %}
+                        <div class="home_order">
+                            <a href='{{ url_for('managers.open_order', model_id=order._id, user_id=current_user._id) }}'>
+                                <p class="model_id">
+                                    Order ID: {{order._id}}
+                                </p>
+                            </a>
+                            <p class="model_id second_id">
+                                Date Placed: {{order.upldate.ctime()[0:10]}}
+                            </p>
+                            <p>
+                                <a href='{{ url_for('managers.open_order', model_id=order._id, user_id=current_user._id) }}'>
+                                    Fulfill Order Now
+                                </a>
+                            </p>
+                            <div class="customer_info">
+                                <p>
+                                    Customer ID: {{order.user_id}}
+                                </p>
+                                <p>
+                                    Customer Email: {{order.user.email}}
+                                </p>
+                            </div>
+                            <p class="order_total">
+                                ${{order.order_total}}
+                            </p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+    <section id="home_section2">
+        <div>
+            <h1>
+                Money Manager
+            </h1>
+            <div class="goal_ctnr">
+                <div>
+                    <p>
+                        Goal:
+                        <span>
+                            ${{current_user.goal}}
+                        </span>
+                        a week
+                    </p>
+                    <p>
+                        Sales:
+                        <span>
+                            ${{current_user.sales_total}}
+                        </span>
+                    </p>
+                </div>
+                <div>
+                    <form action="" method="POST">
+                        {{form.hidden_tag()}}
+                        <p>
+                            SET YOUR GOAL
+                        </p>
+                        <div class="input_ctnr">
+                            {{form.submit_goal()}}
+                            {{form.goal(size="6", maxlength="5")}}
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="moneybars_container">
+                <div class="moneybar_empty"></div>
+                {% if current_user.sales_total != 0 %}
+                    <div class="moneybar_fill" style="width: {{current_user.perc_goal}}%;"></div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+</main>
+
+
+{% endblock  %}
+

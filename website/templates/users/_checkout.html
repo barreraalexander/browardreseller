@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main>
+    <section id="checkout_section1">
+        <h1>
+            Checkout
+            <span>
+                {{order_summary.item_count}} Items
+            </span>
+        </h1>
+        <form action="" method="POST">
+            <div class="shipping">
+
+            </div>
+            <div class="payment">
+
+            </div>
+            <div class="review">
+
+            </div>
+            
+            <div class="order_summary">
+                <h1>
+                    ORDER SUMMARY
+                </h1>
+                <div>
+                    <p>
+                        SHIPPING: {{order_summary.shipping_total}}
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        MERCH: {{order_summary.retail_total}}
+                    </p>
+                </div>
+                <div class="item_count">
+                    <p>
+                        ITEMS{{order_summary.item_count}}
+                    </p>
+                </div>
+            </div>
+            {{checkout_form.submit_order (class_='btn_filled fw_btn')}}
+        </form>
+    </section>
+</main>
+
+{% endblock %}

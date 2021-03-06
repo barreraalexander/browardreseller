@@ -1,0 +1,82 @@
+{% extends 'base_manager.html' %}
+
+{% block content %}
+
+<main>
+    {% if order.is_fulfilled == 0 %}
+        <section id="open_order_section1">
+            <div class="open_order_ctnr">
+                <div>
+                    <div class="user_info_ctnr">
+                        <h2>
+                            Order Placed By
+                        </h2>
+                        <p>
+                            User ID:{{user._id}}
+                            Email:{{user.email}}
+                        </p>
+                    </div>
+                    <div class="user_info_ctnr" style="width:75%">
+                        <h2>
+                            Items Ordered
+                        </h2>
+                        {% for item in items_ordered %}
+                            <p>{{item._id}}</p>
+                        {%   endfor %}
+                    </div>
+                    <div class="order_summary">
+                        <h2>
+                            Order Summary
+                        </h2>
+                        <p class="date_ordered">
+                            Date Order Placed: {{order.upldate.isoformat()}}
+                        </p>
+                        <p>
+                            Shipping To
+                            <p>
+                                {{order.shipping_to}}
+                            </p>
+                        </p>
+                        <p>
+                            Payment Info
+                            <p>
+                                {{order.payment_info}}
+                            </p>
+                        </p>
+                        <hr>
+                        <p>
+                            Merchandise Payment:
+                            <span class='money'>
+                                ${{items_totals.selling_price}}
+                            </span>
+                        </p>
+                        <p>
+                            Shipping Payment:
+                            <span class="money">
+                                ${{items_totals.shipping_price}}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <form action="" method="POST">
+                    <p>fulfilled order here</p>
+                    {{form.hidden_tag()}}
+                    {{form.fulfill_order_id(class_='invisible',value=order._id)}}
+                    {{form.submit_fulfill(class_='btn_filled fw_btn')}}
+                </form>
+                {% else %}
+                    <div>
+                        <h2 class="order_fulfilled">
+                            ORDER FULFILLED
+                        </h2>
+                        <span class="date_ordered">
+                            Order Complete: {{sale.upldate}}
+                        </span>
+                    </div>
+                    <a class="sale_link" href="{{ url_for('managers.sale', model_id=sale._id, user_id=current_user._id) }}">See Data on the Sale Here</a>
+            {% endif %}
+            </div>
+        </section>
+</main>
+
+{% endblock %}

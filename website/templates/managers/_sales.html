@@ -1,0 +1,64 @@
+{% extends 'base_manager.html' %}
+
+{% block content %}
+    <main>
+        <section id="sales_section1" >
+            {% for model in models %}
+                <div class="sale_ctnr">
+                    <p class="model_id"> 
+                        Sale ID: {{model._id}}
+                    </p>
+                    <div class="seller_info">
+                        <h2>
+                            Seller
+                        </h2>
+                        <p class="model_id">
+                            Manager ID: {{model.manager._id}}
+                        </p>
+                        <p>
+                            Name: {{model.manager.f_name}}, {{model.manager.l_name}}
+                        </p>
+                        <p>
+                            
+                        </p>
+                    </div>
+
+                    <div class="customer_info">
+                        <h2>
+                            Customer
+                        </h2>
+                        <p class="model_id">
+                            User {{model.user._id}}
+                        </p>
+                        <p>
+                            
+                        </p>
+                    </div>
+
+                    <div class="money_stats">
+                        <h5>
+                            Money Stats
+                        </h5>
+                        <p>
+                            Selling Cost : ${{model.selling_cost}}
+                        </p>
+                        <p>
+                            Shipping Cost : ${{model.shipping_cost}}
+                        </p>
+
+                        <p>
+                            Selling Price : ${{model.selling_price}}
+                        </p>
+
+                        <p>
+                            Shipping Price : ${{model.shipping_price}}
+                        </p>
+                    </div>
+                    <a href="{{ url_for('managers.open_order', user_id=current_user._id, model_id=model.order_id) }}">
+                        See the Order
+                    </a>
+                </div>
+            {% endfor %}
+        </section>
+    </main>
+{% endblock %}

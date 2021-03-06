@@ -1,0 +1,87 @@
+{% extends 'base_manager.html' %}
+
+
+{% block content %}
+    <main>
+        <section id="inventory_section1">
+            {% for model in models %}
+                <div class="inventory_ctnr">
+                    <p class="model_id">
+                        ID: {{model._id}}
+                    </p>
+                    <a href="{{ url_for('managers.inv_item_m', model_id=model._id, user_id=current_user._id) }}">
+                        <h2>
+                            {{model.name}}
+                        </h2>
+                    </a>
+                    <div class="item_details">
+                        <p >
+                            Brand: {{model.brand}}
+                        </p>
+                        <p>
+                            SKU: {{model.model_num}}
+                        </p>
+                        <p>
+                            Stock: {{model.stock}}
+                        </p>
+                        <p>
+                            Category: {{model.category}}
+                        </p>
+                        <p>
+                            Colors : {{model.colors}}
+                        </p>
+                        <p>
+                            Size : {{model.size}}
+                        </p>
+                        <p>
+                            Condition : {{model.obj_condition}}
+                        </p>
+                    </div>
+
+                    <div class="money_stats">
+                        <h5>Money Stats</h5>
+                        <p>
+                            Orginal Value  Price : ${{model.orig_value}}
+                        </p>
+                        <p>
+                            Purchase Price : ${{model.purchase_price}}
+                        </p>
+
+                        <p>
+                            Selling Price : ${{model.selling_price}}
+                        </p>
+
+                        <p>
+                            Shipping Price : ${{model.shipping_price}}
+                        </p>
+                        
+                        {% if model.stock == 0 %}
+                                <p style="color:red"> 
+                            {% else %}    
+                                <p> 
+                        {% endif %}
+                                    Stock : {{model.stock}}
+                                </p>
+
+                        <div class="button_ctnr">
+                            <button onclick=redir("{{ url_for('managers.inv_item_m', model_id=model._id, user_id=current_user._id) }}")>
+                                EDIT
+                            </button>
+    
+                            <button class="delete_btn">
+                                DELETE
+                            </button>
+                        </div>    
+
+                        <div class="img_ctnr">
+                            {% for i in range(model.imgfiles|length) %}
+                                <img src="{{ url_for('static', filename='images/item_images/'+model._id+'/thumbnails/'+model.imgfiles[i])}}" alt="shoes">
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+        </section>
+    </main>
+{% endblock %}

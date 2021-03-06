@@ -1,0 +1,79 @@
+//SECTION: APPLIES TO ALL
+*{
+    box-sizing: border-box;
+}
+body, html{
+    height: calc(100% - 2em);
+    margin: 0;
+    font-family: "GoogleSans", "Helvetica";
+}
+main>section{
+    padding: .5em;
+}
+main{
+    padding: .50em;
+    margin: .50em;
+}
+//SECTION: GENERAL TYPOGRAPHY
+h1 {
+    font-weight: 300;
+    font-size: 1.7rem;
+    margin-top: 0;
+}
+p {
+    margin-top: 0;
+}
+p:last-of-type{
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+a:hover{
+    transform: scale(1.2) !important;
+}
+
+//SECTION: base_aside_section
+#base_aside_section{
+    background-color: $primary4;
+    border: 1px solid transparent;
+    height: 3em;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    a{
+        color: #000;
+        text-decoration: none;
+    }
+    ul{
+        display: flex;
+        list-style: none;
+        padding: 0;
+        justify-content: space-around;
+    }
+}
+
+#base_aside_section:hover{
+    background-color: $primary1;
+    a{
+        color: #fff;
+    }
+    
+}
+
+
+//SECTION: MEDIA QUERIES 
+@media only screen and (min-width:$tablet_bp){
+    #base_aside_section{
+        height: 4em;
+        padding: 1em;
+        padding-bottom: 4em;
+        a{
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+    }
+
+}
+
+@media only screen and (min-width:$desktop_bp){
+}

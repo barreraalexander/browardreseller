@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<main>
+    <section id="cart_section1">
+        <form class="invisible" action="" method="POST"  enctype="multipart/form-data">
+            {{remove_form.hidden_tag()}}
+            {{remove_form.removing_id}}
+            {{remove_form.submit_remove}}
+        </form>
+    </section>
+
+    <section id="cart_section2">
+        {% for sell_div in sell_divs %}
+            {{sell_div}}
+        {% endfor %}
+    </section>
+
+
+    <section id="cart_section3">
+        <form class="" action="" method="POST"  enctype="multipart/form-data">
+            {{order_form.hidden_tag()}}
+            {{order_form.cart_content(class='invisible',value=cart)}}        
+            {{order_form.submit_order(class='btn_filled fw_btn')}}
+        </form>
+    </section>
+</main>
+
+{% endblock %}
