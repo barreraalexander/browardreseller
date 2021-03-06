@@ -17,6 +17,7 @@ from flask_login import login_user,logout_user, current_user, login_required
 
 managers = Blueprint ('managers', __name__)
 
+
 @managers.route('/backstage/<user_id>/add_item', methods=['GET', 'POST'])
 @login_required
 def add_item (user_id):
@@ -174,7 +175,7 @@ def inv_item_m(model_id, user_id):
             return redirect(url_for('managers.inventory', user_id=current_user._id))
 
 
-    return render_template('managers/_inv_item_m.html', model=model, form=form)
+    return render_template('managers/_inv_item.html', model=model, form=form)
 
 
 @managers.route('/backstage/<user_id>/open_orders', methods=['GET'])

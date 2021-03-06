@@ -1,16 +1,16 @@
 from flask_assets import Bundle
 
 bundles = {
-    'main_scss': Bundle(
-        'scss/main/main.scss',
-        filters='libsass',
-        depends='scss/*.scss',
-        output='gen/css/main.%(version)s.css'
-    ),
     'manager_scss': Bundle(
         'scss/manager/main.scss',
         filters='libsass',
         depends='scss/manager/*.scss',
+        output='gen/css/main.%(version)s.css'
+    ),
+    'user_scss': Bundle(
+        'scss/user/main.scss',
+        filters='libsass',
+        depends='scss/user/*.scss',
         output='gen/css/main.%(version)s.css'
     ),
     'main_js': Bundle(

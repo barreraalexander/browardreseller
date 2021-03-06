@@ -5,16 +5,24 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=GoogleSans:wght@100;400&display=swap" rel="stylesheet">
+
+
         <!-- CSS -->
-        {% assets "main_scss" %}
+        {% assets "user_scss" %}
             <link rel="stylesheet" href="{{ ASSET_URL}}">
         {% endassets %}
 
 
         {% if title %}
-        <title> Broward County Reseller - {{title}} </title>
+            <title>
+                Broward County Reseller - {{title}}
+            </title>
         {% else %}
-        <title> Broward County Reseller </title>
+            <title>
+                Broward County Reseller
+            </title>
         {% endif %} 
 </head>
     
@@ -25,13 +33,18 @@
             <nav>              
                 <ul>
                     <li>
-                        <a href="{{url_for('main.index')}}">
+                        <a href="{{url_for('users.index')}}">
                             HOME
                         </a>
                     </li>
                     <li>
                         <a href="{{url_for('users.cart')}}">
                             CART
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('managers.backstage')}}">
+                            BACKSTAGE
                         </a>
                     </li>
                 </ul>
@@ -62,5 +75,7 @@
 {% assets "main_js" %}
     <script type="text/javascript" src="{{ ASSET_URL}}"></script>
 {% endassets %}
+
+
     </body>
     </html>

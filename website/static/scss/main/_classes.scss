@@ -1,4 +1,3 @@
-
 .btn_filled{
     @include cta_btn;
     color: #fff;
@@ -9,13 +8,11 @@
 .fw_btn{
     width: 80%;
     font-size: 1.5rem;
-    // margin-top: 1.4em;
     max-width: 500px;
     position: absolute;
     left: 0;
     right: 0;
     margin: 2em auto;
-    // margin: 0 auto;
 }
 
 .btn_empty{
@@ -25,8 +22,6 @@
     border: 2px solid $primary1;
 }
 
-
-
 .color_circ{
     border-radius: 100px;
     width: 5em;
@@ -34,7 +29,6 @@
     margin: .5em;
     padding: .5em;
 }
-
 
 .colors_div{
     margin-top: 2em;
@@ -67,19 +61,19 @@
 }
 
 
-
-
-
-
 .h2_banner{
     text-align: center;
     font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: 2px;
 }
+
+
 .invisible{
     display: none;
 }
+
+
 
 .item_top_flex{
     display: flex;

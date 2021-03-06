@@ -5,7 +5,7 @@
 body, html{
     height: calc(100% - 2em);
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "GoogleSans", "Helvetica";
 }
 main>section{
     padding: .5em;
@@ -28,6 +28,10 @@ p:last-of-type{
     line-height: 1.5;
 }
 
+a:hover{
+    transform: scale(1.2) !important;
+}
+
 //SECTION: base_aside_section
 #base_aside_section{
     background-color: $primary4;
@@ -47,6 +51,15 @@ p:last-of-type{
         justify-content: space-around;
     }
 }
+
+#base_aside_section:hover{
+    background-color: $primary1;
+    a{
+        color: #fff;
+    }
+    
+}
+
 
 //SECTION: MEDIA QUERIES 
 @media only screen and (min-width:$tablet_bp){

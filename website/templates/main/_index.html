@@ -1,11 +1,11 @@
-{% extends '/main/base.html' %}
+{% extends 'users/base.html' %}
 
 {% block content %}
 
 <!-- //SECTION: index_section1 -->
 <section id="index_section1">
     <div class="slider_heading_ctnr">
-        <a href="{{ url_for('main.inv_item', model_id=slider_item._id) }}">
+        <a href="{{ url_for('users.inv_item', model_id=slider_item._id) }}">
             <p>
                 {{slider_item.name}}
             </p>
@@ -86,7 +86,7 @@
 <section id="index_section2">
     <div id="main_item_ctnr">
         <div>
-            <a href="{{ url_for('main.inv_item', model_id=promo_item._id) }}">
+            <a href="{{ url_for('users.inv_item', model_id=promo_item._id) }}">
                 <p>
                     {{promo_item.name}}
                 </p>
@@ -99,7 +99,7 @@
 
         </div>
     </div>
-    <button onclick="redir( '{{ url_for('main.inv_item', model_id=promo_item._id) }}' )" class="btn_filled">
+    <button onclick="redir( '{{ url_for('users.inv_item', model_id=promo_item._id) }}' )" class="btn_filled">
         LEARN MORE
     </button>
 </section>
