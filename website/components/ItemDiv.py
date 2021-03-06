@@ -7,7 +7,7 @@ def component(model):
         img_src = url_for('static', filename=f'images/item_images/{model._id}/thumbnails/{model.imgfiles[0]}')
         a_src = url_for('users.inv_item', model_id=model._id)
         
-        component = Markup(f"""
+        return Markup(f"""
         <h5> {model.name} </h5>
         <div class='sell_divs_ctnr'>
             <div class='sell_img_div'>
@@ -41,4 +41,3 @@ def component(model):
         </div>
         <hr>
         """)
-        return component
