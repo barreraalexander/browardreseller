@@ -19,8 +19,6 @@ from datetime import datetime, timedelta
 # from website.models.manager import Manager
 
 
-
-
 users = Blueprint ('users', __name__)
 
 
@@ -41,8 +39,8 @@ def index ():
     slider_item.sale_start = datetime(year=2021, month=1, day=6)
     slider_item.sale_end = datetime(year=2021, month=2, day=26)
     slider_item.sale_daysleft = str(slider_item.sale_end - datetime.now()).split(',')[0].split(' ')[0]
-
     return render_template('users/_index.html', flexs=flexs, models=models, promo_item=promo_item, slider_item=slider_item)
+
 
 @users.route ("/inventory/<string:model_id>", methods=["GET", "POST"])
 def inv_item (model_id):
@@ -63,12 +61,9 @@ def inv_item (model_id):
     
             user.cart += model_id
             User.update(user)
-            return redirect( url_for('main.index') )
+            return redirect( url_for('users.index') )
 
     return render_template('users/_inv_item.html', model=model, form=form)
-
-
-
 
     
 @users.route ('/cart', methods=['GET', 'POST'])
@@ -103,7 +98,8 @@ def cart ():
             models.remove(model)
 
 
-    sell_divs = [ItemDiv.get_sell_div(model) for model in models]
+    sell_divs = [item_div_cmpnt(model) for model in models]
+    # sell_divs = [ItemDiv.get_sell_div(model) for model in models]
     return render_template('users/_cart.html', title='Cart', models=models, cart=user.cart, order_form=order_form, remove_form=remove_form, sell_divs=sell_divs)
 
 @users.route('/checkout/<string:model_id>', methods=['GET', 'POST'])
@@ -148,7 +144,7 @@ def checkout (model_id):
         Order.add(new_order)
 
         print (new_order)
-        return redirect( url_for('main.index') )
+        return redirect( url_for('users.index') )
 
     return render_template('users/_checkout.html', checkout_form=checkout_form,
                                              order_summary=order_summary,

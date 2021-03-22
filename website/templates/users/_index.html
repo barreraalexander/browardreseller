@@ -1,4 +1,4 @@
-{% extends 'users/base.html' %}
+{% extends '/users/base.html' %}
 
 {% block content %}
 
@@ -181,12 +181,6 @@
         </h3>
     </section>
 
-
-    <form class="invisible" action="" method="POST"  enctype="multipart/form-data">
-        {{form.hidden_tag()}}
-        {{form.submit_atc(class="btn_filled fw_btn")}}
-        {{ form.item_id(class="invisible") }}
-    </form>
 
     <p id='temp_id' class='invisible' > </p>
     {% endblock content %}
