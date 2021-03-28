@@ -1,11 +1,13 @@
-//SECTION: needs to load first, and in this order
+// SECTION: needs to load first, and in this order
 @import '../main/_variables.scss';
 @import '../main/_mixins.scss';
 @import '../main/_classes.scss';
+@import '../main/_base.scss';
 
 //SECTION: scss
 @import '_base.scss';
 @import '_cart.scss';
 @import '_checkout.scss';
+@import '_classes.scss';
 @import '_index.scss';
 @import '_inv_item.scss';

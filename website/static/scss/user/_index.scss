@@ -88,6 +88,9 @@
     svg{
         width: 80%;
     }
+    :hover{
+        transform: scale(1.1);
+    }
 }
 
 
@@ -200,17 +203,16 @@
 #index_section5{  
     background-color: $primary4;
     display: flex;
-    padding: 5em;
+    padding: 2em;
     flex-flow: row nowrap;
 }
 
 
 .badge_ctnr{
-    display: grid;
-    grid-template-rows: 4em 4em;
-    grid-template-columns: 8em 8em;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1em;
     justify-content: center;
-    gap: 4em;
     width: 100%;
 }
 

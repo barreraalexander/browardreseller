@@ -1,3 +1,15 @@
+*{
+    box-sizing: border-box;
+}
+body, html{
+    height: calc(100% - 2em);
+    margin: 0;
+    font-family: "GoogleSans", "Helvetica";
+}
+main{
+    padding: .50em;
+    margin: .50em;
+}
 #base_manager_aside_section{
     aside{
         background-color: $primary4;

@@ -39,7 +39,6 @@ def add_item (user_id):
             #     pass
 
             Item.add(new_item)
-            print ('ran')           
             flash (f"Added {new_item.name} to Inventory {form.obj_condition.data} {form.uploaded_to.data} {form.c_type.data}")
             return redirect(url_for('managers.inventory', user_id=current_user._id))
     return render_template('managers/_add_item.html', form=form)
@@ -59,7 +58,7 @@ def backstage():
             manager = Manager.get(by='email', value=login_form.login_email.data)
             if manager and bcrypt.check_password_hash (manager.password, login_form.login_password.data):
                 x = login_user (manager, remember=True)
-                print ( 'Log In Status:' ,x)
+                print ( 'Log In Status:' , x)
                 next_page = request.args.get('next')
                 return redirect(url_for('managers.backstage'))
             else:
@@ -106,12 +105,12 @@ def home(user_id):
         items = Item.get_models(order.order_data)
         for item in items:
             order.order_total += item.selling_price
+        order.order_total = round(order.order_total, 2)
 
         if request.method=="POST":
             if form.validate_on_submit and form.submit_goal.data:
                 current_user.goal = form.goal.data
                 Manager.update(current_user)
-                print ('ran')
                 return redirect(url_for('managers.home', user_id=current_user._id))
 
     sales = Sale.get(by='manager_id', value=current_user._id, getmany=True)
@@ -171,7 +170,6 @@ def inv_item_m(model_id, user_id):
             #     pass
 
             # Item.add(new_item)
-            print ('ran')           
             return redirect(url_for('managers.inventory', user_id=current_user._id))
 
 

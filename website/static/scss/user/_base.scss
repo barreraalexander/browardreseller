@@ -28,8 +28,18 @@ p:last-of-type{
     line-height: 1.5;
 }
 
-a:hover{
-    transform: scale(1.2) !important;
+a{
+    :hover{
+        transform: scale(1.025);
+        text-decoration: none;
+
+    }
+}
+
+button{
+    :hover{
+        transform: scale(1.1);
+    }
 }
 
 //SECTION: base_aside_section
@@ -44,22 +54,21 @@ a:hover{
         color: #000;
         text-decoration: none;
     }
+    a:hover{
+        color: #fff;
+    }
     ul{
         display: flex;
         list-style: none;
         padding: 0;
         justify-content: space-around;
+
     }
 }
 
 #base_aside_section:hover{
-    background-color: $primary1;
-    a{
-        color: #fff;
-    }
-    
+    background-color: darken($primary4, 5%)
 }
-
 
 //SECTION: MEDIA QUERIES 
 @media only screen and (min-width:$tablet_bp){

@@ -35,7 +35,7 @@ def create_app (config_class=DBConfig):
     from website.blueprints.managers.routes import managers
     from website.blueprints.users.routes import users
 
-    app.register_blueprint  (managers)
+    app.register_blueprint  (managers, url_prefix="/backstage")
     app.register_blueprint  (users)
 
     assets.register(bundles)

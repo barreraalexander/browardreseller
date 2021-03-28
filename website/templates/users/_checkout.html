@@ -5,44 +5,48 @@
 <main>
     <section id="checkout_section1">
         <h1>
-            Checkout
-            <span>
-                {{order_summary.item_count}} Items
+            CHECKOUT
+            <span class="primary1_text">
+                {{order_summary.item_count}}
             </span>
+            Items
         </h1>
-        <form action="" method="POST">
-            <div class="shipping">
+        <div class="checkout_form_ctnr">
 
-            </div>
-            <div class="payment">
-
-            </div>
-            <div class="review">
-
-            </div>
-            
-            <div class="order_summary">
-                <h1>
-                    ORDER SUMMARY
-                </h1>
-                <div>
-                    <p>
-                        SHIPPING: {{order_summary.shipping_total}}
-                    </p>
+            <form action="" method="POST">
+                <div class="shipping">
+                    
                 </div>
-                <div>
-                    <p>
-                        MERCH: {{order_summary.retail_total}}
-                    </p>
+                <div class="payment">
+                    
                 </div>
-                <div class="item_count">
-                    <p>
-                        ITEMS{{order_summary.item_count}}
-                    </p>
+                <div class="review">
+                    
                 </div>
-            </div>
-            {{checkout_form.submit_order (class_='btn_filled fw_btn')}}
-        </form>
+                
+                <div class="order_summary">
+                    <h2>
+                        ORDER SUMMARY
+                    </h2>
+                    <div>
+                        <p>
+                            SHIPPING: ${{order_summary.shipping_total}}
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            MERCH: ${{order_summary.retail_total}}
+                        </p>
+                    </div>
+                    <div class="item_count">
+                        <p>
+                            ITEMS {{order_summary.item_count}}
+                        </p>
+                    </div>
+                </div>
+                {{checkout_form.submit_order (class_='btn_filled fw_btn')}}
+            </form>
+        </div>
     </section>
 </main>
 

@@ -3,23 +3,78 @@
 
 {% block content %}
 
-<main>
-    <form class="invisible" action="" method="POST"  enctype="multipart/form-data">
-        {{remove_form.hidden_tag()}}
-        {{remove_form.removing_id}}
-        {{remove_form.submit_remove}}
-    </form>
-    
-    {% for sell_div in sell_divs %}
-        {{sell_div}}
-    {% endfor %}
-    
-    <form class="" action="" method="POST"  enctype="multipart/form-data">
-        {{order_form.hidden_tag()}}
-        {{order_form.cart_content(class='invisible',value=cart)}}        
-        {{order_form.submit_order(class='btn_filled fw_btn')}}
-    </form>
+<main class="cart_main">
+    <section id="cart_section2">
+        <h1>Your Cart Summary</h1>
+        <p>
+            Subtotal (
+                <span class="primary3_text">
+                    {{cart_summary.item_count}}
+                </span>
+            items)
+            <span class="primary2_text">
+                : ${{cart_summary.cart_total}}
+            </span>
+        </p>
+        <button onclick=redir("{{ url_for('users.checkout', model_id=user._id) }}") class="btn_filled">
+            PROCEED TO CHECKOUT
+        </button>
+    </section>
 
+    <hr>
+    
+    <section id="cart_section1">
+        {% for model in models %}
+            <div class="cart_item">
+                <p class="model_id">
+                    {{model._id}}
+                </p>
+                <p class="small_details weighted_detail">
+                    {{model.brand.upper()}}
+                </p>
+                <p>
+                    {{model.name}}
+                </p>
+                <p class="small_details">
+                    Size: {{model.size}}
+                </p>
+                <p class="small_details">
+                    Condition: {{model.obj_condition}}
+                </p>
+                <p class="small_details">
+                    Price: ${{model.selling_price}}
+                </p>
+                <div class="adder_lesser" style="display:flex;flex-flow:row nowrap;">
+                    <button id="less_button">
+                        +
+                    </button>
+                    <div class="stock_count_ctnr">
+                        <p class="stock_count">
+                            0
+                        </p>
+                    </div>
+                    <button id="add_button">
+                        -
+                    </button>
+                </div>
+                <form method="POST">
+                    {{remove_form.removing_id(class_="invisible", value=model.id, placeholder=model.id)}}
+                    {{remove_form.submit_remove(class_="remove_button")}}
+                </form>
+            </div>
+        {% endfor %}        
+        
+        <form class="" action="" method="POST"  enctype="multipart/form-data">
+            {{order_form.hidden_tag()}}
+            {{order_form.cart_content(class='invisible',value=cart)}}        
+            <!-- {{order_form.submit_order(class='btn_filled fw_btn')}} -->
+        </form>
+        <form class="invisible" action="" method="POST"  enctype="multipart/form-data">
+            {{remove_form.hidden_tag()}}
+            {{remove_form.removing_id}}
+            {{remove_form.submit_remove}}
+        </form>
+    </section>
 </main>
 
 {% endblock %}

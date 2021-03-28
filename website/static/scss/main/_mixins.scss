@@ -10,9 +10,13 @@
     position: relative;
     padding: 1.5em;
     height: 6em;
-    width: 10em;
+    width: 8em;
     p{
         font-size: .6rem;
         color: #fff;
     }
+}
+
+@mixin shadow {
+    box-shadow: 1px 5px 8px 1px #c8c8c8;
 }

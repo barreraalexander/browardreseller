@@ -10,10 +10,6 @@
                 {{slider_item.name}}
             </p>
         </a>
-        <div class="empty_div"></div>
-        <!-- <p>
-            ON SALE NOW
-        </p> -->
         <div id="maxim_svg_ctnr">
             <svg id="maxim_svg" viewBox="0 0 32.543 32.146">
                 <g id="maximize-white" transform="translate(-206.574 -216.574)">
@@ -45,8 +41,9 @@
                     <line id="Line_3-2" data-name="Line 3" y1="23" x2="23" transform="translate(337.5 110.5)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5"/>
                     </g>
                 </g>
-                </svg>
+            </svg>
         </div>
+        
     </div>
 
     <div id="ann_slider_ctnr" class="invisible">
@@ -181,7 +178,10 @@
         </h3>
     </section>
 
-
+<form action="" method="POST" class="invisible">
+    {{form.item_id}}
+    {{form.submit_atc}}
+</form>
     <p id='temp_id' class='invisible' > </p>
     {% endblock content %}
 

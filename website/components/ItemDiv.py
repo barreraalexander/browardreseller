@@ -1,5 +1,4 @@
 from flask import Markup, url_for, redirect
-from website.models.item import Item
 
 def component(model):
         img_src = url_for('static', filename=f'images/item_images/{model._id}/{model.imgfiles[0]}')

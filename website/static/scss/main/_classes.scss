@@ -1,5 +1,18 @@
+.primary1_text{
+    color: $primary1;
+}
+
+.primary2_text{
+    color: $primary2;
+}
+
+.primary3_text{
+    color: $primary3;
+}
+
 .btn_filled{
     @include cta_btn;
+    @include shadow;
     color: #fff;
     background-color: $primary1;
     border: 1px solid $primary1;
@@ -104,6 +117,7 @@
     color: $primary2;
     font-size: 1.3rem !important;
     font-weight: 600;
+    margin-bottom: 0;
 }
 
 .flex_item_shipping{

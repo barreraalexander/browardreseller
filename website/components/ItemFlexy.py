@@ -13,7 +13,14 @@ def component(model):
                 {model.name}
             </p>
         </a>
-        <p class='flex_item_price'> ${model.selling_price} </p>
-        <p class='flex_item_shipping'> Shipping: ${model.shipping_price} </p>
+        <p class='flex_item_price'>
+            ${model.selling_price}
+        </p>
+        <p class='flex_item_shipping'>
+            Shipping: ${model.shipping_price}
+        </p>
+        <button class="btn_filled" onclick=submitAdd('{model._id}')>
+            ADD TO CART
+        </button>
     </div>
             """)

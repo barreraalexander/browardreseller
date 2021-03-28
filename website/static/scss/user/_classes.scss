@@ -1,0 +1,29 @@
+.cart_item{
+    @include shadow;
+    background: $primary4;
+    border-radius: 10px;
+    // height: 5em;
+    padding: 1em;
+    width: 100%;
+
+}
+
+.cart_main{
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1em;
+    padding: 1em;
+    hr{
+        width: 100%;
+        opacity: .8;
+    }
+}
+
+.small_details{
+    font-size: .7rem;
+}
+
+.weighted_detail{
+    font-weight: 700;
+    color: $primary1;
+}

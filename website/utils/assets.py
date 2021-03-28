@@ -4,13 +4,13 @@ bundles = {
     'manager_scss': Bundle(
         'scss/manager/main.scss',
         filters='libsass',
-        depends='scss/manager/*.scss',
+        depends=['scss/main/*.scss', 'scss/manager/*.scss'],
         output='gen/css/main.%(version)s.css'
     ),
     'user_scss': Bundle(
         'scss/user/main.scss',
         filters='libsass',
-        depends='scss/user/*.scss',
+        depends=['scss/main/*.scss', 'scss/user/*.scss'],
         output='gen/css/main.%(version)s.css'
     ),
     'main_js': Bundle(

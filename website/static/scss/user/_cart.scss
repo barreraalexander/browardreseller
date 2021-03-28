@@ -1,12 +1,27 @@
 #cart_section1{
-    
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1em;
 }
 
 #cart_section2{
-
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    gap: 1.5em;
+    button{
+        align-self: center;
+    }
+    h1{
+        font-size: 1.3rem;
+    }
 }
 
 #cart_section3{
     margin-bottom: 5em;
     padding-bottom: 5em;
 }
+
+
+
+
