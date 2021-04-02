@@ -89,8 +89,23 @@ class AddItem(FlaskForm):
 class EditItem(FlaskForm):
     pass
 
-
 class SetGoalForm(FlaskForm):
     goal = IntegerField('Goal')
     submit_goal = SubmitField('Set Goal')
+
+
+class NewCouponForm(FlaskForm):
+    coupon_code = StringField('Coupon Code')
+    discount_rate = IntegerField ('Discount Rate (in percent)')
+    coupon_submit = SubmitField('Add New Coupon Code')
+    start_date = StringField('Start Date')
+    expire_date = StringField('Expire Date')
+
+class NewDiscountForm(FlaskForm):
+    discount_item_id = StringField('Discount Item ID')
+    discount_rate = IntegerField ('Discount Rate (in percent)')
+    discount_submit = SubmitField('Add New Discount')
+    start_date = StringField('Start Date')
+    expire_date = StringField('Expire Date')
+    
 

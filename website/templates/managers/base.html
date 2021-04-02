@@ -25,10 +25,11 @@
 
 <body>
 <!-- #//SECTION: base_aside_section -->
-    <section id="base_manager_aside_section">
-        <aside>
-            <nav>              
-                <ul>
+<section id="base_manager_aside_section">
+    <aside>
+        <nav>              
+            <ul>
+                {% if current_user.is_authenticated %}
                     <li>
                         <a href=" {{url_for('managers.home', user_id=current_user.id) }}">
                             HOME
@@ -55,8 +56,25 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{url_for('managers.logout', user_id=current_user._id)}}">
+                        <a href="{{url_for('managers.logout')}}">
                             LOGOUT
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('managers.coupon_codes')}}">
+                            COUPON CODES
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('managers.discount_items')}}">
+                            DISCOUNT ITEMS
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    <li style="width:100%;padding-top: 1em;">
+                        <a href="{{url_for('users.index')}}">
+                            RETURN TO BROWARD RESELLER
                         </a>
                     </li>
                 </ul>

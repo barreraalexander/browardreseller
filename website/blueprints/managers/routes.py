@@ -1,13 +1,16 @@
 from website import db, bcrypt
 from website.blueprints.managers.forms import NewItemForm, NewSaleForm, \
                                         LoginForm, RegisterForm, \
-                                        FulfillForm, SetGoalForm
+                                        FulfillForm, SetGoalForm, \
+                                        NewCouponForm, NewDiscountForm
 from website.blueprints.managers.utils import save_pictures
 from website.models.item import Item
 from website.models.user import User
 from website.models.manager import Manager
 from website.models.order import Order
 from website.models.sale import Sale
+from website.models.discount_item import DiscountItem
+from website.models.coupon_code import CouponCode
 from website.blueprints.managers import CATEGORIES, CONDITIONS, COLORS
 from flask_login import current_user
 from os import path
@@ -18,7 +21,7 @@ from flask_login import login_user,logout_user, current_user, login_required
 managers = Blueprint ('managers', __name__)
 
 
-@managers.route('/backstage/<user_id>/add_item', methods=['GET', 'POST'])
+@managers.route('/<user_id>/add_item', methods=['GET', 'POST'])
 @login_required
 def add_item (user_id):
     form = NewItemForm ()
@@ -46,7 +49,7 @@ def add_item (user_id):
 
 
 
-@managers.route ('/backstage', methods=['GET', 'POST'])
+@managers.route ('/', methods=['GET', 'POST'])
 def backstage():
     if current_user.is_authenticated:
         return redirect(url_for('managers.home', user_id=current_user.id))
@@ -91,9 +94,10 @@ def backstage():
     return render_template ('managers/_backstage.html', login_form=login_form, register_form=register_form)
 
 
-@managers.route('/backstage/u/<user_id>/home', methods=['POST', 'GET'])
+@managers.route('/<user_id>/home', methods=['POST', 'GET'])
 @login_required
 def home(user_id):
+
     open_orders = Order.get(by='is_fulfilled', value=0, getmany=True)
     for order in open_orders:
         user = User.get(by='_id', value=order.user_id)
@@ -127,7 +131,7 @@ def home(user_id):
     return render_template('managers/_home.html', open_orders=open_orders, form=form)
 
 
-@managers.route ('/backstage/<user_id>/inventory')
+@managers.route ('/<user_id>/inventory')
 @login_required
 def inventory (user_id):
     models = Item.get(getall=True)
@@ -136,7 +140,7 @@ def inventory (user_id):
 
 
 
-@managers.route('/backstage/<user_id>/inventory/<string:model_id>', methods=['GET', 'POST'])
+@managers.route('/<user_id>/inventory/<string:model_id>', methods=['GET', 'POST'])
 @login_required
 def inv_item_m(model_id, user_id):
     model = Item.get(by='_id', value=model_id)
@@ -176,7 +180,7 @@ def inv_item_m(model_id, user_id):
     return render_template('managers/_inv_item.html', model=model, form=form)
 
 
-@managers.route('/backstage/<user_id>/open_orders', methods=['GET'])
+@managers.route('/<user_id>/open_orders', methods=['GET'])
 @login_required
 def open_orders(user_id):
     models = Order.get(getall=True)
@@ -188,7 +192,7 @@ def open_orders(user_id):
         # print (model.items)
     return render_template('managers/_open_orders.html', models=models)
 
-@managers.route('/backstage/<user_id>/open_orders/<string:model_id>', methods=['GET', 'POST'])
+@managers.route('/<user_id>/open_orders/<string:model_id>', methods=['GET', 'POST'])
 def open_order(model_id, user_id):
     order = Order.get(by='_id', value=model_id)
     user = User.get(by='_id', value=order.user_id)
@@ -228,7 +232,7 @@ def open_order(model_id, user_id):
                                             sale=sale)
 
 
-@managers.route('/backstage/<user_id>/sales', methods=['GET'])
+@managers.route('/<user_id>/sales', methods=['GET'])
 @login_required
 def sales(user_id):
     models = Sale.get(getall=True)
@@ -238,15 +242,39 @@ def sales(user_id):
     return render_template('managers/_sales.html', models=models)
 
 
-@managers.route('/backstage/<user_id>/sales/<string:model_id>', methods=['GET'])
+@managers.route('/<user_id>/sales/<string:model_id>', methods=['GET'])
 @login_required
 def sale(model_id):
     model = Sale.get(by='_id', value=model_id)
     return render_template('managers/_sale.html', model=model)
 
 
-@managers.route('/backstage/<user_id>/logout')
+@managers.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('managers.backstage'))
+
+@managers.route('/coupon_codes')
+@login_required
+def coupon_codes():
+    form = NewCouponForm
+
+    if request.method=="POST":
+        if form.validate_on_submit and form.submit_new_coupon.data:
+            pass
+    
+    return render_template('managers/_coupon_codes.html', form=form)
+
+@managers.route('/discount_items')
+@login_required
+def discount_items():
+    form = NewDiscountForm
+    
+    if request.method=="POST":
+        if form.validate_on_submit and form.submit_new_discount.data:
+            pass
+
+    return render_template('managers/_discount_items.html', form=form)
+
+
