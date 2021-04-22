@@ -45,7 +45,7 @@
         </div>
     </section>
     <section id="checkout_section2">
-        <form action="" method="POST">
+        <form action="{{url_for('api.checkout_order')}}" method="POST">
             <div class="form_group">
                 {{checkout_form.shipping_to.label}}
                 {{checkout_form.shipping_to}}

@@ -1,6 +1,5 @@
 from website.models.master import Model
 
-
 class Order (Model):
     mtype = 'order'
     tablename = 'orders'
@@ -14,11 +13,11 @@ class Order (Model):
         statement = (f"""
         INSERT INTO {model.tablename}
             (_id, is_fulfilled, order_data,
-            payment_info, shipping_to, user_id )
+            shipping_to, user_id )
         VALUES
             ('{model._id}', {model.is_fulfilled},
-            '{model.order_data}', '{model.payment_info}',
-            '{model.shipping_to}', '{model.user_id}')
+            '{model.order_data}','{model.shipping_to}',
+            '{model.user_id}')
         """)
         return statement
 
@@ -39,7 +38,6 @@ class Order (Model):
             shipping_to_zip varchar(50),
             is_fulfilled int,
             order_data text,
-            payment_info varchar(100),
             card_number varchar(50),
             card_csv varchar(25),
             card_exp datetime,
@@ -70,24 +68,22 @@ class Order (Model):
 #//SECTION: __init__
     def __init__(self, mdict):
         super().__init__(mdict)
-        self.is_fulfilled = mdict['is_fulfilled']
-        self.order_data = mdict['order_data']
-        self.payment_info = mdict['payment_info']
-        self.card_number = mdict['card_number']
+        self.user_id = mdict['user_id']
         self.card_csv = mdict['card_csv']
         self.card_exp = mdict['card_exp']
+        self.card_number = mdict['card_number']
+        self.order_data = mdict['order_data']
         self.shipping_to = mdict['shipping_to']
         self.shipping_to_country = mdict['shipping_to_country']
         self.shipping_to_state = mdict['shipping_to_state']
         self.shipping_to_zip = mdict['shipping_to_zip']
-        self.user_id = mdict['user_id']
+        self.is_fulfilled = mdict['is_fulfilled']
 
     def __str__(self):
         return (f"""
         ID: {self._id}
         IS FULFILLED: {self.is_fulfilled}
         ORDER: {self.order_data}
-        PAYMENT INFO: {self.payment_info}
         CARD NUMBER: {self.card_number}
         CARD SECURITY CODE: {self.card_csv}
         CARD EXPIRATION DATE: {self.card_exp}

@@ -37,23 +37,6 @@ def index ():
     slider_item.sale_end = datetime(year=2021, month=4, day=10)
     slider_item.sale_daysleft = str(slider_item.sale_end - datetime.now()).split(',')[0].split(' ')[0]
 
-    # if request.method == "POST":
-    #     if form.validate_on_submit and form.submit_atc.data:
-    #         model_id = f"{form.item_id.data}$"
-    #         ip_requesting = request.remote_addr
-    #         user = User.get(by='ip_address', value=ip_requesting)
-
-    #         if user:
-    #             pass
-    #         else:
-    #             user = User.get_temp_user(ip_requesting)
-    #             User.add(user)
-    
-    #         user.cart += model_id
-    #         User.update(user)
-    #         return redirect( url_for('users.index') )
-
-    # print ('REQUEST', request)
     return render_template('users/_index.html',
                             flexs=flexs,
                             form=form,
@@ -61,31 +44,11 @@ def index ():
                             promo_item=promo_item,
                             slider_item=slider_item)
 
-@users.route("/test_me", methods=["GET", "POST"])
-def test_me ():
-    pass
 
 @users.route ("/inventory/<string:model_id>", methods=["GET", "POST"])
 def inv_item (model_id):
-    model = Item.get(by="_id", value=model_id)
     form = AddtoCart()
-
-    if request.method == "POST":
-        if form.validate_on_submit and form.submit_atc.data:
-            model_id = f"{form.item_id.data}$"
-            ip_requesting = request.remote_addr
-            user = User.get(by='ip_address', value=ip_requesting)
-
-            if user:
-                pass
-            else:
-                user = User.get_temp_user(ip_requesting)
-                User.add(user)
-    
-            user.cart += model_id
-            User.update(user)
-            return redirect( url_for('users.index') )
-
+    model = Item.get(by="_id", value=model_id)
     return render_template('users/_inv_item.html', model=model, form=form)
 
     
@@ -103,17 +66,6 @@ def cart ():
 
     order_form = OrderForm ()
     remove_form = RemoveItemForm()
-    if request.method == 'POST':
-        if order_form.validate_on_submit and order_form.submit_order.data:
-            return redirect(url_for('users.checkout', model_id=user._id))
-
-        elif remove_form.validate_on_submit and remove_form.submit_remove.data:
-            remove_id = remove_form.removing_id.data
-            cart = user.cart_as_ls()            
-            cart.remove(remove_id)
-            user.cart = "$".join(cart) + '$'
-            User.update(user)
-            return redirect(url_for('users.cart'))
 
     for model in models:
         if model==None:
@@ -152,8 +104,9 @@ def checkout (model_id):
     item_count = len(inv_models)
 
     for model in inv_models:
-        retail_total += model.selling_price
-        shipping_total += model.shipping_price
+        if model != None:    
+            retail_total += model.selling_price
+            shipping_total += model.shipping_price
 
     order_summary = {
         'shipping_total' : round(retail_total, 2),
@@ -165,37 +118,7 @@ def checkout (model_id):
     checkout_form = CheckoutForm()
     checkout_form.shipping_to_state.choices = STATES
     checkout_form.shipping_to_country.choices = COUNTRIES
-    if checkout_form.validate_on_submit and checkout_form.submit_order.data:
-        mdict = {
-            'user_id' : user._id,
-            'shipping_to' : checkout_form.shipping_to.data,
-            'shipping_to_country' : checkout_form.shipping_to_country.data,
-            'shipping_to_state' : checkout_form.shipping_to_state.data,
-            'shipping_to_zip' : checkout_form.shipping_to_zip.data,
-            'payment_info' : checkout_form.payment_info.data,
-            'card_number' : checkout_form.card_number.data,
-            'card_csv' : checkout_form.card_csv.data,
-            'card_exp' : checkout_form.card_exp.data,
-            'order_data' : user.cart,
-            'is_fulfilled' : 0,
-        }
-        try:
-            mdict.update(order_summary)
-            new_order = Order(mdict)
-            # Order.add(new_order)
-            # user.cart = ""
-            # user.update(user)
-            flash ('we got your order')
-            print (new_order)
-            return redirect( url_for('users.order_summary', model_id=new_order._id) )
-        except Exception as e:
-            flash ('we were unable to complete your order')
-            print ("\n\n")
-            print (e)
-            # flash (e)
-            print ("\n\n")
-
-        return redirect( url_for('users.index') )
+    
 
     return render_template('users/_checkout.html', checkout_form=checkout_form,
                                              order_summary=order_summary,

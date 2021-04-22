@@ -56,10 +56,10 @@
             </div>
         </div>
 
-        <form action="" method="POST"  enctype="multipart/form-data">
+        <form id="atc_form"  enctype="multipart/form-data">
             {{form.hidden_tag()}}
             {{form.submit_atc(class="btn_filled fw_btn")}}
-            {{ form.item_id(class="invisible", value=model._id) }}
+            {{form.item_id(class="invisible", value=model._id)}}
             <p id="model_id" class="invisible">{{model._id}}</p>
         </form>
 
