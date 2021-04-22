@@ -255,26 +255,43 @@ def logout():
     logout_user()
     return redirect(url_for('managers.backstage'))
 
-@managers.route('/coupon_codes')
+@managers.route('/coupon_codes', methods=['GET', 'POST'])
 @login_required
 def coupon_codes():
-    form = NewCouponForm
-
+    form = NewCouponForm ()
+    all_coupons = CouponCode.get(getall=True)
     if request.method=="POST":
         if form.validate_on_submit and form.submit_new_coupon.data:
-            pass
-    
-    return render_template('managers/_coupon_codes.html', form=form)
+            try:
+                new_coupon_code = CouponCode(form.data)
+                CouponCode.add(new_coupon_code)
+            except Exception as e:
+                print ("Couldn't add new coupon code")
+                print (e)
+            
+            return(redirect(url_for('managers.coupon_codes')))
 
-@managers.route('/discount_items')
+    return render_template('managers/_coupon_codes.html', form=form, all_coupons=all_coupons)
+
+@managers.route('/discount_items', methods=['GET', 'POST'])
 @login_required
 def discount_items():
-    form = NewDiscountForm
-    
+    form = NewDiscountForm ()
+    all_discounts = DiscountItem.get(getall=True)
+    all_discounted_items = [ Item.get(by="_id", value=discount.discount_item_id) for discount in all_discounts ]
+    # !TODO:create DiscountItem.apply_reductions(all_discounts, discount_rate)
+
     if request.method=="POST":
         if form.validate_on_submit and form.submit_new_discount.data:
-            pass
+            try:
+                new_discount_item = DiscountItem(form.data)
+                DiscountItem.add(new_discount_item)
+            except Exception as e:
+                print ("Couldn't add new discount item")
+                print (e)                
+            
+            return(redirect(url_for('managers.discount_items')))
 
-    return render_template('managers/_discount_items.html', form=form)
+    return render_template('managers/_discount_items.html', form=form, all_discounted_items=all_discounted_items)
 
 

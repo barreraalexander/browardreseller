@@ -33,9 +33,11 @@ def create_app (config_class=DBConfig):
     login_manager.init_app(app)
 
     from website.blueprints.managers.routes import managers
+    from website.blueprints.api.routes import api
     from website.blueprints.users.routes import users
 
     app.register_blueprint  (managers, url_prefix="/backstage")
+    app.register_blueprint  (api, url_prefix="/api")
     app.register_blueprint  (users)
 
     assets.register(bundles)

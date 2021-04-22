@@ -2,6 +2,7 @@ from website import bcrypt, db
 from website.blueprints.users.forms import AddtoCart,OrderForm, RemoveItemForm, CheckoutForm
 from website.components.ItemDiv import component as item_div_cmpnt
 from website.components.ItemFlexy import component as item_flexy_cmpnt
+from website.models.coupon_code import CouponCode
 from website.models.item import Item
 from website.models.order import Order
 from website.models.sale import Sale
@@ -11,6 +12,9 @@ from flask import render_template, url_for,\
 
 from flask_login import current_user
 from datetime import datetime, timedelta
+from website.blueprints.users import STATES, COUNTRIES
+import json
+
 
 users = Blueprint ('users', __name__)
 
@@ -49,6 +53,7 @@ def index ():
             User.update(user)
             return redirect( url_for('users.index') )
 
+    # print ('REQUEST', request)
     return render_template('users/_index.html',
                             flexs=flexs,
                             form=form,
@@ -56,6 +61,9 @@ def index ():
                             promo_item=promo_item,
                             slider_item=slider_item)
 
+@users.route("/test_me", methods=["GET", "POST"])
+def test_me ():
+    pass
 
 @users.route ("/inventory/<string:model_id>", methods=["GET", "POST"])
 def inv_item (model_id):
@@ -83,7 +91,6 @@ def inv_item (model_id):
     
 @users.route ('/cart', methods=['GET', 'POST'])
 def cart ():
-    
     curr_ip = request.remote_addr
     user = User.get(by='ip_address', value=curr_ip)
 
@@ -134,6 +141,8 @@ def cart ():
 def checkout (model_id):
     user = User.get(by='_id', value=model_id)
     item_ids = user.cart_as_ls()
+    coupon_codes = CouponCode.get(getall=True)
+
 
     inv_models = [ Item.get(by='_id', value=item_id) \
                    for item_id in item_ids ]
@@ -154,33 +163,62 @@ def checkout (model_id):
 
     model = Order.get(by='_id', value=model_id)
     checkout_form = CheckoutForm()
-
+    checkout_form.shipping_to_state.choices = STATES
+    checkout_form.shipping_to_country.choices = COUNTRIES
     if checkout_form.validate_on_submit and checkout_form.submit_order.data:
         mdict = {
             'user_id' : user._id,
             'shipping_to' : checkout_form.shipping_to.data,
+            'shipping_to_country' : checkout_form.shipping_to_country.data,
+            'shipping_to_state' : checkout_form.shipping_to_state.data,
+            'shipping_to_zip' : checkout_form.shipping_to_zip.data,
             'payment_info' : checkout_form.payment_info.data,
+            'card_number' : checkout_form.card_number.data,
+            'card_csv' : checkout_form.card_csv.data,
+            'card_exp' : checkout_form.card_exp.data,
             'order_data' : user.cart,
             'is_fulfilled' : 0,
-            
         }
-        mdict.update(order_summary)
-        new_order = Order(mdict)
-        Order.add(new_order)
+        try:
+            mdict.update(order_summary)
+            new_order = Order(mdict)
+            # Order.add(new_order)
+            # user.cart = ""
+            # user.update(user)
+            flash ('we got your order')
+            print (new_order)
+            return redirect( url_for('users.order_summary', model_id=new_order._id) )
+        except Exception as e:
+            flash ('we were unable to complete your order')
+            print ("\n\n")
+            print (e)
+            # flash (e)
+            print ("\n\n")
 
-        user.cart = ""
-        user.update(user)
-        print (new_order)
-
-        
         return redirect( url_for('users.index') )
 
     return render_template('users/_checkout.html', checkout_form=checkout_form,
                                              order_summary=order_summary,
-                                             inv_models=inv_models)
+                                             inv_models=inv_models,
+                                             coupon_codes=coupon_codes)
+
+@users.route('/submit_checkout', methods=['GET', 'POST'])
+def submit_checkout():
+    flash ('we got your order')
+    return (redirect(url_for('users.index')))
+
 
 @users.route('/delete_item/<string:model_id>', methods=['GET', 'POST'])
 def delete_cart_item (model_id):
-    print ('aye')
-    flash ()
     return redirect( url_for('users.cart'))
+
+
+@users.route('/order_summary/<string:model_id>')
+def order_summary(model_id):
+    model = Order.get(by='_id', value=model_id)
+    return render_template('users/_order_summary.html', model=model)
+
+
+@users.route('/user_order/<string:model_id>')
+def user_orders(model_id):
+    pass

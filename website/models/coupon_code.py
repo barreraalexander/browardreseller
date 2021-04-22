@@ -1,5 +1,5 @@
 from website.models.master import Model
-
+import json
 
 class CouponCode (Model):
     mtype = 'coupon_code'
@@ -66,3 +66,22 @@ class CouponCode (Model):
         self.discount_rate = mdict["discount_rate"]
         self.start_date = mdict['start_date']
         self.expire_date = mdict['expire_date']
+
+
+    @property
+    def as_dict (self):
+        return {
+            '_id' : self.id,
+            'coupon_code' : self.coupon_code,
+            'discount_rate' : self.discount_rate,
+        }
+
+
+    def __str__(self):
+        return (f"""
+        ID: {self._id}
+        Coupon Code: {self.coupon_code}
+        Discount Rate: {self.discount_rate}
+        Start Date: {self.start_date}
+        End Date: {self.expire_date}
+        """)

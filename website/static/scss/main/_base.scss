@@ -3,6 +3,11 @@
 //         transform: scale(1.1) !important;
 //     }
 // }
+body, html{
+    height: calc(100% - 2em);
+    margin: 0;
+    font-family: "GoogleSans", "Helvetica";
+}
 
 h1, h2, h3, h4, h5, h6{
     margin: 0;

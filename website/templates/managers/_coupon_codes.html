@@ -1,4 +1,45 @@
 {% extends '/managers/base.html' %}
 
 {% block content %}
+
+<main>
+    <section id="coupon_codes_section1">
+        <h1>
+            ADD A NEW DISCOUNT CODE
+        </h1>
+        <form action="" method="POST">
+            {{form.hidden_tag()}}
+            <div class="form_group">
+                {{form.coupon_code.label}}
+                {{form.coupon_code}}    
+            </div>
+            <div class="form_group">
+                {{form.discount_rate.label}}
+                {{form.discount_rate}}%    
+            </div>
+            <div class="form_group">
+                {{form.start_date.label}}
+                {{form.start_date}}    
+            </div>
+            <div class="form_group">
+                {{form.expire_date.label}}
+                {{form.expire_date}}
+            </div>
+            <div class="form_group">
+                {{form.submit_new_coupon}}
+            </div>
+        </form>
+    </section>
+
+    <section id="coupon_codes_section2" >
+        <h1>
+            ACTIVE COUPONS
+        </h1>
+        {% for coupon in all_coupons %}
+            {{coupon}}
+        {% endfor %}
+    </section>
+</main>
+
+
 {% endblock %}

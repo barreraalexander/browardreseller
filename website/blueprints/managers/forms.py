@@ -6,6 +6,7 @@ from wtforms import StringField, PasswordField,\
                     SelectField, SelectMultipleField,\
                     RadioField, FloatField, \
                     IntegerField, MultipleFileField
+from wtforms.fields.html5 import DateField
 
 # class NewItemForm (FlaskForm):
 #     category =  SelectField ('Categories')
@@ -95,17 +96,33 @@ class SetGoalForm(FlaskForm):
 
 
 class NewCouponForm(FlaskForm):
-    coupon_code = StringField('Coupon Code')
-    discount_rate = IntegerField ('Discount Rate (in percent)')
-    coupon_submit = SubmitField('Add New Coupon Code')
-    start_date = StringField('Start Date')
-    expire_date = StringField('Expire Date')
+    coupon_code = StringField('Coupon Code',
+                                    render_kw={
+                                        'size': 60,
+                                        'placeholder': 'Only letters, numbers are allowed (no characters or spaces).'
+                                        })
+    discount_rate = IntegerField ('Discount Rate (in percent)',
+                                    render_kw={
+                                        'size': 2,
+                                        'placeholder': '10%'
+                                        })
+    start_date = DateField('Start Date')
+    expire_date = DateField('Expire Date')
+    submit_new_coupon = SubmitField ('Submit')
 
 class NewDiscountForm(FlaskForm):
-    discount_item_id = StringField('Discount Item ID')
-    discount_rate = IntegerField ('Discount Rate (in percent)')
-    discount_submit = SubmitField('Add New Discount')
-    start_date = StringField('Start Date')
-    expire_date = StringField('Expire Date')
+    discount_item_id = StringField('Discount Item ID',
+                                    render_kw={
+                                        'size': 30,
+                                        'placeholder': 'select an item below'
+                                        })
+    discount_rate = IntegerField ('Discount Rate (in percent)',
+                                    render_kw={
+                                        'size': 2,
+                                        'placeholder': '10%'
+                                        })
+    start_date = DateField('Start Date')
+    expire_date = DateField('Expire Date')
+    submit_new_discount = SubmitField ('Submit')
     
 

@@ -14,3 +14,72 @@
 .item_count{
     background: $primary3;
 }
+
+.form_group{
+    // display: flex;
+    // flex-flow: row nowrap;
+    // gap: 1em;
+    // justify-content: flex-start;
+    // align-items: center;
+    margin-bottom: 1.5em;
+    input{
+        border-radius: 10px;
+        padding: .5em .7em;
+    }
+    select{
+        border-radius: 5px;
+    }
+    
+
+}
+.form_group_alt{
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 1em;
+}
+
+label::after{
+    content: "\a";
+    white-space: pre;
+}
+
+#coupon_code_progress{
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+}
+
+
+.coupon_code_progressing{        
+	background: linear-gradient(-45deg, red, purple);
+	background-size: 400% 400%;
+	-webkit-animation: shifting_gradient 3s ease infinite;
+	        animation: shifting_gradient 3s ease infinite;
+
+}
+
+
+@-webkit-keyframes shifting_gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+@keyframes shifting_gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+

@@ -12,42 +12,89 @@
             Items
         </h1>
         <div class="checkout_form_ctnr">
-
-            <form action="" method="POST">
-                <div class="shipping">
-                    
-                </div>
-                <div class="payment">
-                    
-                </div>
-                <div class="review">
-                    
-                </div>
+            <div class="shipping">
                 
-                <div class="order_summary">
-                    <h2>
-                        ORDER SUMMARY
-                    </h2>
-                    <div>
-                        <p>
-                            SHIPPING: ${{order_summary.shipping_total}}
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            MERCH: ${{order_summary.retail_total}}
-                        </p>
-                    </div>
-                    <div class="item_count">
-                        <p>
-                            ITEMS {{order_summary.item_count}}
-                        </p>
-                    </div>
+            </div>
+            <div class="payment">
+                
+            </div>
+            <div class="review">
+                
+            </div>
+            
+            <div class="order_summary">
+                <h2>
+                    ORDER SUMMARY
+                </h2>
+                <div>
+                    <p>
+                        SHIPPING: ${{order_summary.shipping_total}}
+                    </p>
                 </div>
-                {{checkout_form.submit_order (class_='btn_filled fw_btn')}}
-            </form>
+                <div>
+                    <p>
+                        MERCH: ${{order_summary.retail_total}}
+                    </p>
+                </div>
+                <div class="item_count">
+                    <p>
+                        ITEMS {{order_summary.item_count}}
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
+    <section id="checkout_section2">
+        <form action="" method="POST">
+            <div class="form_group">
+                {{checkout_form.shipping_to.label}}
+                {{checkout_form.shipping_to}}
+            </div>
+            <div class="shipping_info">
+                <div class="form_group">
+                    {{checkout_form.shipping_to_state.label}}
+                    <select name="shipping_to_state" id="">
+                        {% for choice in checkout_form.shipping_to_state.choices %}
+                            <option value={{choice}}>
+                                {{choice}}
+                            </option>                        
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form_group">
+                    {{checkout_form.shipping_to_zip.label}}
+                    {{checkout_form.shipping_to_zip}}
+                </div>
+            </div>
+            <div class="form_group">
+                {{checkout_form.card_number.label}}
+                {{checkout_form.card_number}}
+            </div>
+            <div class="form_group form_group_alt">
+                <div class="card_info">
+                    {{checkout_form.card_csv.label}}
+                    {{checkout_form.card_csv}}
+                </div>
+                <div class="card_info">
+                    {{checkout_form.card_exp.label}}
+                    {{checkout_form.card_exp}}
+                </div>
+            </div>
+            <div class="form_group">
+                {{checkout_form.coupon_code.label}}
+                <div style="display:flex;gap:.5em;align-items:center;">
+                    {{checkout_form.coupon_code}}
+                    <div id="coupon_code_progress" class="invisible"></div>
+                </div>
+            </div>
+            <div class="form_group">
+                {{checkout_form.submit_order (class_='btn_filled fw_btn')}}
+            </div>
+        </form>
+    </section>
+    {% for code in coupon_codes %}
+        {{code.coupon_code}}
+    {% endfor %}
 </main>
 
 {% endblock %}

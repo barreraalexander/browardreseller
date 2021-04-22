@@ -5,6 +5,11 @@ class DiscountItem (Model):
     mtype = 'discout_item'
     tablename = 'discount_items'
 
+    @staticmethod
+    def apply_reductions(discounted_items, discount_rate):
+        for item in discounted_items:
+            item.selling_price = item.selling_price * 3
+
     @classmethod
     def get_insert_statement (cls, model):
         """ 
@@ -60,10 +65,26 @@ class DiscountItem (Model):
         
         return statement
 
-
     def __init__(self, mdict):
         super().__init__(mdict)
         self.discount_item_id = mdict['discount_item_id']
         self.discount_rate = mdict['discount_rate']
         self.start_date = mdict['start_date']
         self.expire_date = mdict['expire_date']
+
+    @property
+    def as_dict(self):
+        return {
+            "_id" : self._id,
+            "discount_item_id" : self.discount_item_id,
+            "discount_rate" : self.discount_rate
+        }
+
+    def __str__(self):
+        return (f"""
+        ID: {self._id}
+        Discount Item ID: {self.discount_item_id}
+        Discount Rate: {self.discount_rate}
+        Start Date: {self.start_date}
+        End Date: {self.expire_date}
+        """)
