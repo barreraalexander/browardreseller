@@ -37,21 +37,21 @@ def index ():
     slider_item.sale_end = datetime(year=2021, month=4, day=10)
     slider_item.sale_daysleft = str(slider_item.sale_end - datetime.now()).split(',')[0].split(' ')[0]
 
-    if request.method == "POST":
-        if form.validate_on_submit and form.submit_atc.data:
-            model_id = f"{form.item_id.data}$"
-            ip_requesting = request.remote_addr
-            user = User.get(by='ip_address', value=ip_requesting)
+    # if request.method == "POST":
+    #     if form.validate_on_submit and form.submit_atc.data:
+    #         model_id = f"{form.item_id.data}$"
+    #         ip_requesting = request.remote_addr
+    #         user = User.get(by='ip_address', value=ip_requesting)
 
-            if user:
-                pass
-            else:
-                user = User.get_temp_user(ip_requesting)
-                User.add(user)
+    #         if user:
+    #             pass
+    #         else:
+    #             user = User.get_temp_user(ip_requesting)
+    #             User.add(user)
     
-            user.cart += model_id
-            User.update(user)
-            return redirect( url_for('users.index') )
+    #         user.cart += model_id
+    #         User.update(user)
+    #         return redirect( url_for('users.index') )
 
     # print ('REQUEST', request)
     return render_template('users/_index.html',

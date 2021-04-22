@@ -31,16 +31,22 @@ def add_to_cart():
             user = current_user
         else:
             curr_ip = request.remote_addr
-            user = User.get (by='ip_addr', value=curr_ip)
+            user = User.get (by='ip_address', value=curr_ip)
         
-        recipe_id = request.json
-        cart_ls = user.cart.split('$')
-        if recipe_id not in cart_ls:
-            user.cart += (f"{recipe_id}$")
-            User.update(user)
-        else:
-            return
-    return
+        model_id = request.json
+
+        user.cart += (f"{model_id}$")
+        User.update(user)
+
+        print (model_id)
+        return
+    #     cart_ls = user.cart.split('$')
+    #     if recipe_id not in cart_ls:
+    #         user.cart += (f"{recipe_id}$")
+    #         User.update(user)
+    #     else:
+    #         return
+    # return
 
 
 
